@@ -12,63 +12,64 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * 
+ *
  * @author OJavierHR
  * @param <K>
- * @param <V> 
+ * @param <V>
  */
 public class EjerciciosABBI<K extends Comparable<K>, V>
         extends ArbolBinarioBusquedaRecursivo<K, V> {
+
     /*
         Implementar metodo que cuente las hojas del arbol 
      */
     public int contarHojas() {
         int hojas = 0;
-        if(!esVacio()){
+        if (!esVacio()) {
             Stack<NodoBinario<K, V>> pilaAux = new Stack();
             NodoBinario<K, V> nodoActual;
-            
+
             pilaAux.add(getRaiz());
-            while(!pilaAux.isEmpty()){
+            do {
                 nodoActual = pilaAux.pop();
-                if(!nodoActual.esVacioHijoDerecho()){
+                if (!nodoActual.esVacioHijoDerecho()) {
                     pilaAux.add(nodoActual.getHijoDerecho());
                 }
-                if(!nodoActual.esVacioHijoIzquierdo()){
+                if (!nodoActual.esVacioHijoIzquierdo()) {
                     pilaAux.add(nodoActual.getHijoIzquierdo());
                 }
-                if(nodoActual.esHoja()){
+                if (nodoActual.esHoja()) {
                     hojas++;
                 }
-            }
+            } while (!pilaAux.isEmpty());
         }
         return hojas;
     }
-    
+
     /*
         Implementar metodo que cuente las hojas del arbol en un determinado 
         nivel
-    */
-    public int contarHojasNivel(int nivel){
+     */
+    public int contarHojasNivel(int nivel) {
         int hojas = 0;
-        if(!esVacio()){
+        if (!esVacio()) {
             Queue<NodoBinario<K, V>> colaAux = new LinkedList();
             NodoBinario<K, V> nodoActual;
             int nodosEnNivel;
             int nivelActual = 0;
-            
+
             colaAux.add(getRaiz());
-            while(!colaAux.isEmpty()){
+            while (!colaAux.isEmpty() && nivelActual <= nivel) {
                 nodosEnNivel = colaAux.size();
-                while(nodosEnNivel > 0){
+                while (nodosEnNivel > 0) {
                     nodoActual = colaAux.poll();
-                    if(!nodoActual.esVacioHijoIzquierdo()){
+                    if (!nodoActual.esVacioHijoIzquierdo()) {
                         colaAux.add(nodoActual.getHijoIzquierdo());
                     }
-                    if(!nodoActual.esVacioHijoDerecho()){
+                    if (!nodoActual.esVacioHijoDerecho()) {
                         colaAux.add(nodoActual.getHijoDerecho());
                     }
-                    if(nivelActual == nivel && nodoActual.esHoja()){
+                    if (nivelActual == nivel && nodoActual.esHoja()) {
                         hojas++;
                     }
                     nodosEnNivel--;
@@ -78,55 +79,54 @@ public class EjerciciosABBI<K extends Comparable<K>, V>
         }
         return hojas;
     }
-    
+
     /*
         funcion que retorne la lista de claves de los niveles del arbol menos el
         nivel n
-    */
-    public List<K> mostrarNodosMenosN(int n){
-        Queue<NodoBinario<K, V>> cola = new LinkedList<>();
-        int nivel = 0;
-        int nodosEnNivel;
-        NodoBinario<K, V> nodoActual;
-        List<K> result = new LinkedList<>();
-        
-        cola.add(raiz);
-        while(!cola.isEmpty()){
-            nodosEnNivel = cola.size();
-            while(nodosEnNivel > 0){
-                nodoActual = cola.poll();
-                if(nivel != n){
-                    result.add(nodoActual.getClave());
+     */
+    public List<K> mostrarNodosMenosN(int n) {
+        List<K> claves = new LinkedList<>();
+        if (!this.esVacio()) {
+            Queue<NodoBinario<K, V>> colaAux = new LinkedList();
+            NodoBinario<K, V> nodoActual;
+            int nodosEnNivel;
+            int nivelActual = 0;
+
+            colaAux.add(getRaiz());
+            while (!colaAux.isEmpty()) {
+                nodosEnNivel = colaAux.size();
+                while (nodosEnNivel > 0) {
+                    nodoActual = colaAux.poll();
+                    if (!nodoActual.esVacioHijoIzquierdo()) {
+                        colaAux.add(nodoActual.getHijoIzquierdo());
+                    }
+                    if (!nodoActual.esVacioHijoDerecho()) {
+                        colaAux.add(nodoActual.getHijoDerecho());
+                    }
+                    if (nivelActual != n) {
+                        claves.add(nodoActual.getClave());
+                    }
+                    nodosEnNivel--;
                 }
-                if(!nodoActual.esVacioHijoIzquierdo()){
-                    cola.add(nodoActual.getHijoIzquierdo());
-                }
-                if(!nodoActual.esVacioHijoDerecho()){
-                    cola.add(nodoActual.getHijoDerecho());
-                }
-                nodosEnNivel--;
+                nivelActual++;
             }
-            nivel++;
         }
-        return result;
+        return claves;
     }
-    
-    public static void main(String[] arg){
-        
+
+    public static void main(String[] arg) {
         EjerciciosABBI<Integer, String> aBBI = new EjerciciosABBI<>();
+
+        aBBI.insertar(8, "A");
+        aBBI.insertar(3, "B");
+        aBBI.insertar(10, "C");
+        aBBI.insertar(1, "D");
+        aBBI.insertar(6, "E");
+        aBBI.insertar(14, "F");
+        aBBI.insertar(4, "G");
+        aBBI.insertar(7, "H");
+        aBBI.insertar(13, "I");
         
-        aBBI.insertar(5, "cinco");
-        aBBI.insertar(4, "cuatro");
-        aBBI.insertar(6, "seis");
-        aBBI.insertar(3, "tres");
-        aBBI.insertar(2, "dos");
-        aBBI.insertar(7, "ciete");
-        aBBI.insertar(10, "diez");
-        aBBI.insertar(1, "uno");
-        aBBI.insertar(8, "ocho");
-        aBBI.insertar(9, "nueve");
-        
-        System.out.println(aBBI.recorridoPorNiveles());
         System.out.println(aBBI.mostrarNodosMenosN(2));
     }
 }

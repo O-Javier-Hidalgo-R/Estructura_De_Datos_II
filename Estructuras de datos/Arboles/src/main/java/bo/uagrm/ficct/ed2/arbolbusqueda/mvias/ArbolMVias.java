@@ -111,7 +111,7 @@ public class ArbolMVias<K extends Comparable<K>, V>
     }
 
     @Override
-    public List<K> recorridoPostOrden() {
+    public List<K> recorridoPosOrden() {
         List<K> result = new ArrayList<>();
         if(NodoNVias.esVacio(raiz)){
             return null;

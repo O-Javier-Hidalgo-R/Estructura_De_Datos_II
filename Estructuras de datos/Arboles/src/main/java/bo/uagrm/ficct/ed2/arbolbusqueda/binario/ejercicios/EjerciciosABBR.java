@@ -4,10 +4,8 @@
  */
 package bo.uagrm.ficct.ed2.arbolbusqueda.binario.ejercicios;
 
-import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
 import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
 import bo.uagrm.ficct.ed2.arbolbusqueda.binario.NodoBinario;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,21 +14,28 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
 
     public EjerciciosABBR() {
     }
-    
+
     public EjerciciosABBR(EjerciciosABBR<K, V> copiando) {
         this.raiz = copiarReferencias(this.raiz, copiando.raiz);
     }
-    
-    private NodoBinario<K, V> copiarReferencias(NodoBinario<K, V> nodoActualCopia, NodoBinario<K, V> nodoActualCopiando) {
-        if(NodoBinario.esVacio(nodoActualCopiando)){
+
+    private NodoBinario<K, V> copiarReferencias(
+            NodoBinario<K, V> nodoActualCopia,
+            NodoBinario<K, V> nodoActualCopiando) {
+        if (NodoBinario.esVacio(nodoActualCopiando)) {
             return null;
         }
-        nodoActualCopia = new NodoBinario<>(nodoActualCopiando.getClave(), nodoActualCopiando.getValor());
-        nodoActualCopia.setHijoIzquierdo(copiarReferencias(nodoActualCopia.getHijoIzquierdo(), nodoActualCopiando.getHijoIzquierdo()));
-        nodoActualCopia.setHijoDerecho(copiarReferencias(nodoActualCopia.getHijoDerecho(), nodoActualCopiando.getHijoDerecho()));
+        nodoActualCopia = new NodoBinario<>(nodoActualCopiando.getClave(),
+                nodoActualCopiando.getValor());
+        nodoActualCopia.setHijoIzquierdo(copiarReferencias(
+                nodoActualCopia.getHijoIzquierdo(),
+                nodoActualCopiando.getHijoIzquierdo()));
+        nodoActualCopia.setHijoDerecho(copiarReferencias(
+                nodoActualCopia.getHijoDerecho(),
+                nodoActualCopiando.getHijoDerecho()));
         return nodoActualCopia;
     }
-    
+
     /*
     Implementar un metodo que retorne si un arbol binario, tiene nodos
     completos, es decir que tenga sus dos hijos diferentes de cero en el nivel 
@@ -40,15 +45,18 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         return tieneNodosCompletosEnNivel(super.raiz, nivel);
     }
 
-    private boolean tieneNodosCompletosEnNivel(NodoBinario<K, V> nodoActual, int nivel) {
+    private boolean tieneNodosCompletosEnNivel(NodoBinario<K, V> nodoActual,
+            int nivel) {
         if (NodoBinario.esVacio(super.getRaiz())) {
             return false;
         }
         if (nivel == 0) {
             return !nodoActual.esIncompleto();
         }
-        boolean parIzq = tieneNodosCompletosEnNivel(nodoActual.getHijoIzquierdo(), nivel - 1);
-        boolean parDer = tieneNodosCompletosEnNivel(nodoActual.getHijoDerecho(), nivel - 1);
+        boolean parIzq = tieneNodosCompletosEnNivel(
+                nodoActual.getHijoIzquierdo(), nivel - 1);
+        boolean parDer = tieneNodosCompletosEnNivel(
+                nodoActual.getHijoDerecho(), nivel - 1);
         return parIzq && parDer;
     }
 
@@ -66,9 +74,8 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         if (nodoActual.esHoja()) {
             return 1;
         }
-        int parIzq = contarHojas(nodoActual.getHijoIzquierdo());
-        int parDer = contarHojas(nodoActual.getHijoDerecho());
-        return parIzq + parDer;
+        return contarHojas(nodoActual.getHijoIzquierdo())
+                + contarHojas(nodoActual.getHijoDerecho());
     }
 
     /*
@@ -83,7 +90,7 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
-        if (nivel == 0) {
+        if (nivel <= 0) {
             if (nodoActual.esHoja()) {
                 return 1;
             }
@@ -102,7 +109,8 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         return mostrarNodosMenosN(super.getRaiz(), nivel);
     }
 
-    private List<K> mostrarNodosMenosN(NodoBinario<K, V> nodoActual, int nivel) {
+    private List<K> mostrarNodosMenosN(NodoBinario<K, V> nodoActual,
+            int nivel) {
         List<K> result = new LinkedList<>();
         int nivelesArbol = super.nivel();
         for (int i = 0; i <= nivelesArbol; i++) {
@@ -113,7 +121,8 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         return result;
     }
 
-    private void recorrerNivel(NodoBinario<K, V> raiz, int nivel, List<K> result) {
+    private void recorrerNivel(NodoBinario<K, V> raiz, int nivel,
+            List<K> result) {
         if (NodoBinario.esVacio(raiz) || nivel < 0) {
             return;
         }
@@ -140,15 +149,13 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
-        if (!nodoActual.esVacioHijoIzquierdo() && nodoActual.esVacioHijoDerecho()) {
-            return nodosConSoloHijoIzquierdo(nodoActual.
-                    getHijoIzquierdo()) + nodosConSoloHijoIzquierdo(
-                            nodoActual.getHijoDerecho()) + 1;
-        } else {
-            return nodosConSoloHijoIzquierdo(nodoActual.
-                    getHijoIzquierdo()) + nodosConSoloHijoIzquierdo(
-                            nodoActual.getHijoDerecho());
+        int c = nodosConSoloHijoIzquierdo(nodoActual.getHijoIzquierdo())
+                + nodosConSoloHijoIzquierdo(nodoActual.getHijoDerecho());
+        if (!nodoActual.esVacioHijoIzquierdo()
+                && nodoActual.esVacioHijoDerecho()) {
+            c++;
         }
+        return c;
     }
 
     /*
@@ -159,21 +166,19 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         return nodosConSoloHijoIzquierdoEnNivelN(this.getRaiz(), nivel);
     }
 
-    private int nodosConSoloHijoIzquierdoEnNivelN(NodoBinario<K, V> nodoActual, int nivel) {
+    private int nodosConSoloHijoIzquierdoEnNivelN(NodoBinario<K, V> nodoActual,
+            int nivel) {
         if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
         if (nivel == 0) {
-            if (!nodoActual.esVacioHijoIzquierdo() && nodoActual.esVacioHijoDerecho()) {
-                return 1;
-            }
-            return 0;
+            return (!nodoActual.esVacioHijoIzquierdo()
+                    && nodoActual.esVacioHijoDerecho()) ? 1 : 0;
         }
-        int parIzq = nodosConSoloHijoIzquierdoEnNivelN(
-                nodoActual.getHijoIzquierdo(), nivel - 1);
-        int parDer = nodosConSoloHijoIzquierdoEnNivelN(
-                nodoActual.getHijoDerecho(), nivel - 1);
-        return parIzq + parDer;
+        return nodosConSoloHijoIzquierdoEnNivelN(
+                nodoActual.getHijoIzquierdo(), nivel - 1)
+                + nodosConSoloHijoIzquierdoEnNivelN(
+                        nodoActual.getHijoDerecho(), nivel - 1);
     }
 
     /*
@@ -181,107 +186,157 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
     nivel especifico del arbol
      */
     public int nodosConSoloHijoIzquierdoDespuesNivelN(int nivel) {
-        return nodosConSoloHijoIzquierdoDespuesNivelN(this.getRaiz(), nivel);
+        return nodosConSoloHijoIzquierdoDespuesNivelN(this.getRaiz(),
+                nivel);
     }
 
-    private int nodosConSoloHijoIzquierdoDespuesNivelN(NodoBinario<K, V> nodoActual, int nivel) {
+    private int nodosConSoloHijoIzquierdoDespuesNivelN(
+            NodoBinario<K, V> nodoActual, int nivel) {
         if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
-        if (!nodoActual.esVacioHijoIzquierdo() && nodoActual.esVacioHijoDerecho() && nivel < 0) {
-            return nodosConSoloHijoIzquierdoDespuesNivelN(
-                    nodoActual.getHijoIzquierdo(), nivel - 1)
-                    + nodosConSoloHijoIzquierdoDespuesNivelN(
-                            nodoActual.getHijoDerecho(), nivel - 1) + 1;
+        int izq = nodosConSoloHijoIzquierdoDespuesNivelN(nodoActual.getHijoIzquierdo(), nivel - 1);
+        int der = nodosConSoloHijoIzquierdoDespuesNivelN(nodoActual.getHijoDerecho(), nivel - 1);
+        int c = izq
+                + der;
+        if ((nivel < 0) && !nodoActual.esVacioHijoIzquierdo()
+                && nodoActual.esVacioHijoDerecho()) {
+            c++;
         }
-        return nodosConSoloHijoIzquierdoDespuesNivelN(
-                nodoActual.getHijoIzquierdo(), nivel - 1)
-                + nodosConSoloHijoIzquierdoDespuesNivelN(
-                        nodoActual.getHijoDerecho(), nivel - 1);
-
+        return c;
     }
 
     /*
     Funcion que retorne true si el arbol es similar a otro
-    */
-    public boolean similar(ArbolBinarioBusquedaRecursivo<?, ?> posibleSimilar){
+     */
+    public boolean similar(ArbolBinarioBusquedaRecursivo<?, ?> posibleSimilar) {
         return similar(super.getRaiz(), posibleSimilar.getRaiz());
     }
-    
+
     private boolean similar(NodoBinario<K, V> nodoActual, NodoBinario<?, ?> nodoSimilarActual) {
-        if(NodoBinario.esVacio(nodoActual) || NodoBinario.esVacio(nodoSimilarActual)){
+        if (NodoBinario.esVacio(nodoActual) || NodoBinario.esVacio(nodoSimilarActual)) {
             return NodoBinario.esVacio(nodoActual) && NodoBinario.esVacio(nodoSimilarActual);
         }
-        return similar(nodoActual.getHijoIzquierdo(), 
-                nodoSimilarActual.getHijoIzquierdo()) && 
-                similar(nodoActual.getHijoDerecho(), 
+        return similar(nodoActual.getHijoIzquierdo(),
+                nodoSimilarActual.getHijoIzquierdo())
+                && similar(nodoActual.getHijoDerecho(),
                         nodoSimilarActual.getHijoDerecho());
     }
-    
+
     /*
     Funcion que retorne el reflejo del arbol.
-    */
-    public EjerciciosABBR<K, V> reflejo(){
-        EjerciciosABBR<K, V> result = new EjerciciosABBR<>(this);
-        result.reflejar(result.raiz);
-        return result;
+        Arbol normal
+    
+                        8 
+                3              10 
+            1       6      __      14 
+         __  __  04  07  __  __  13  __  
+    
+        Arbol reflejo
+    
+                        8 
+               10               3 
+           14      __       6       1 
+         __  13  __  __   7   4  __  __ 
+     */
+    public EjerciciosABBR<K, V> reflejo() {
+        EjerciciosABBR<K, V> reflejo = new EjerciciosABBR<>();
+        reflejo.raiz = reflejo(this.raiz, reflejo.raiz);
+        return reflejo;
+    }
+    
+    private NodoBinario<K, V> reflejo(NodoBinario<K, V> nodoActual, 
+            NodoBinario<K, V> nodoActualRef) {
+        if(NodoBinario.esVacio(nodoActual)){
+            return (NodoBinario<K, V>) NodoBinario.nodoVacio();
+        }
+        nodoActualRef = new NodoBinario<>(nodoActual.getClave(), 
+                nodoActual.getValor());
+        nodoActualRef.setHijoDerecho(reflejo(
+                nodoActual.getHijoIzquierdo(), 
+                nodoActualRef.getHijoDerecho()));
+        nodoActualRef.setHijoIzquierdo(reflejo(
+                nodoActual.getHijoDerecho(), 
+                nodoActualRef.getHijoIzquierdo()));
+        return nodoActualRef;
+    }
+    //alternativa
+    /*public EjerciciosABBR<K, V> reflejo() {
+    EjerciciosABBR<K, V> result = new EjerciciosABBR<>(this);
+    result.reflejar(result.raiz);
+    return result;
     }
     
     private void reflejar(NodoBinario<K, V> nodoActual) {
-        if(NodoBinario.esVacio(nodoActual)){
-            return;
-        }
-        NodoBinario<K, V> anteriorIzquierdo = nodoActual.getHijoIzquierdo();
-        NodoBinario<K, V> anteriorDerecho = nodoActual.getHijoDerecho();
-        nodoActual.setHijoIzquierdo(anteriorDerecho);
-        nodoActual.setHijoDerecho(anteriorIzquierdo);
-        reflejar(nodoActual.getHijoIzquierdo());
-        reflejar(nodoActual.getHijoDerecho());
+    if (NodoBinario.esVacio(nodoActual)) {
+    return;
     }
-    
+    NodoBinario<K, V> anteriorIzquierdo = nodoActual.getHijoIzquierdo();
+    NodoBinario<K, V> anteriorDerecho = nodoActual.getHijoDerecho();
+    nodoActual.setHijoIzquierdo(anteriorDerecho);
+    nodoActual.setHijoDerecho(anteriorIzquierdo);
+    reflejar(nodoActual.getHijoIzquierdo());
+    reflejar(nodoActual.getHijoDerecho());
+    }*/
+
     /*
     Funcion que retorne si un arbol es zurdo siendo este un arbol que:
         -es vacio
         -es raiz hoja
         -cada nodo tiene mas nodos a la izquierda que a la derecha
-    */
-    public boolean esZurdo(){
+     */
+    public boolean esZurdo() {
         return esZurdo(this.raiz);
     }
-    
+
     private boolean esZurdo(NodoBinario<K, V> nodoActual) {
-        if(NodoBinario.esVacio(nodoActual)){
+        if (NodoBinario.esVacio(nodoActual)) {
             return true;
         }
-        if(nodoActual.esHoja()){
+        if (nodoActual.esHoja()) {
             return true;
         }
         int cantIzquierda = cantNodos(nodoActual.getHijoIzquierdo());
         int cantDerecha = cantNodos(nodoActual.getHijoDerecho());
-        return esZurdo(nodoActual.getHijoIzquierdo()) && 
-                esZurdo(nodoActual.getHijoDerecho()) && 
-                (cantIzquierda > cantDerecha);
+        return esZurdo(nodoActual.getHijoIzquierdo())
+                && esZurdo(nodoActual.getHijoDerecho())
+                && (cantIzquierda > cantDerecha);
     }
-    
-    private int cantNodos(NodoBinario<K, V> nodoActual){
-        if(NodoBinario.esVacio(nodoActual)){
+
+    private int cantNodos(NodoBinario<K, V> nodoActual) {
+        if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
-        return cantNodos(nodoActual.getHijoIzquierdo()) +
-                cantNodos(nodoActual.getHijoDerecho()) + 
-                1;
+        return cantNodos(nodoActual.getHijoIzquierdo())
+                + cantNodos(nodoActual.getHijoDerecho())
+                + 1;
     }
-    
+
     public static void main(String[] arg) {
         EjerciciosABBR<Integer, String> aBBR = new EjerciciosABBR<>();
-        
-        aBBR.insertar(5, "");
-        aBBR.insertar(3, "");
-        /*aBBR.insertar(6, "");
-        aBBR.insertar(2, "");
-        aBBR.insertar(4, "");
-        aBBR.insertar(1, "");*/
 
-        System.out.println(aBBR.esZurdo());
+        aBBR.insertar(8, "A");
+        aBBR.insertar(3, "B");
+        aBBR.insertar(10, "C");
+        aBBR.insertar(1, "D");
+        aBBR.insertar(6, "E");
+        aBBR.insertar(14, "F");
+        aBBR.insertar(4, "G");
+        aBBR.insertar(13, "I");
+        aBBR.insertar(7, "J");
+        
+        aBBR.mostrar();
+        
+        EjerciciosABBR<Integer, String> x = aBBR.reflejo();
+        
+        x.mostrar();
+    }
+
+    private void mostrar() {
+        System.out.println(recorridoPorNiveles());
+        System.out.println(recorridoPreOrden());
+        System.out.println(recorridoInOrden());
+        System.out.println(recorridoPosOrden());
+        System.out.println(nivel());
     }
 }

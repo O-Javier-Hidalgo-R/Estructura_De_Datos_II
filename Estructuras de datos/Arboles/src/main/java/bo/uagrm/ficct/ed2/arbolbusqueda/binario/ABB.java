@@ -1,44 +1,75 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt 
- * to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java 
- * to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package bo.uagrm.ficct.ed2.arbolbusqueda.binario;
 
 import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
-/**
- * Clase que permite implementar un arbol de busqueda binario generico usando
- * solo algoritmos recursivos.
- *
- * @author OJavierHR
- * @param <K> Tipo de dato que llevaran los nodos del arbol como claves.
- * @param <V> Tipo de dato que llevaran los nodos del arbol como valores.
- */
-public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
-        implements IArbolBusqueda<K, V> {
+public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
 
-    /**
-     * Nodo inicial del arbol.
-     */
     protected NodoBinario<K, V> raiz;
 
     /**
      * Constructor por defecto.
      */
-    public ArbolBinarioBusquedaRecursivo() {
+    public ABB() {
 
     }
 
     /**
      * Constructor que inicializa los valores del arbol con los recorridos
-     * previos de un arbol ya establecidos.
+     * previos de un arbol ya establecidos. <br>
+     * Para ello se necesitan de dos recorridos en profundidad, uno in-orden y y
+     * uno pre o post orden.<p>
+     * En caso de reconstruir con pre-Orden el algoritmo es el siguiente:<br>
+     * &nbsp;&nbsp;&nbsp;<b>a)</b> Se inserta como el padre un nodo nuevo con la
+     * clave y valor que esten primero en el recorrido in-orden.<br>
+     * &nbsp;&nbsp;&nbsp;<b>b)</b> Se asigna a la izquierda el sub arbol que
+     * resultara de las sub-listas de las claves y valores de los sub-recorridos
+     * in-orden y preorden: <br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido in-orden:
+     * Desde inicio hasta un nodo antes del que se inserto como nodo padre en el
+     * paso anterior.<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido pre-orden:
+     * Desde el segundo elemento de la lista y que es del mismo tamaño que la
+     * sublista in-orden.<br>
+     * &nbsp;&nbsp;&nbsp;<b>c)</b> Se asigna a la derecha el sub arbol que
+     * resultara de las sub-listas de las claves y valores de los sub-recorridos
+     * in-orden y preorden:<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido in-orden:
+     * Desde el nodo posterior al nodo padre insertado en el anterior paso "a)"
+     * el ultimo nodo.<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido pre-orden:
+     * Desde el indice resultado del tamaño de la sublista usada para la parte
+     * izquierda +1, hasta el final.<br>
+     * &nbsp;&nbsp;&nbsp;<b>d)</b> Repetir los anteriores pasos hasta que las
+     * listas se vacien.<br>
+     * En caso de reconstruir con post-Orden el algoritmo es el siguiente:<br>
+     * &nbsp;&nbsp;&nbsp;<b>a)</b> Se inserta como el padre un nodo nuevo con la
+     * clave y valor que esten ultimos en el recorrido post-orden.<br>
+     * &nbsp;&nbsp;&nbsp;<b>b)</b> Se asigna a la izquierda el sub arbol que
+     * resultara de las sub-listas de las claves y valores de los sub-recorridos
+     * in-orden y preorden:<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido in-orden:
+     * Desde inicio hasta un nodo antes del que se inserto como nodo padre en el
+     * paso anterior.<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido pre-orden:
+     * Desde el primer elemento de la lista y que es del mismo tamaño que la
+     * sublista in-orden.<br>
+     * &nbsp;&nbsp;&nbsp;<b>c)</b> Se asigna a la derecha el sub arbol que
+     * resultara de las sub-listas de las claves y valores de los sub-recorridos
+     * in-orden y preorden:<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido in-orden:
+     * Desde el nodo posterior al nodo padre insertado en el anterior paso "a)"
+     * el ultimo nodo.<br>
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b> Sub recorrido pre-orden:
+     * Desde el indice resultado del tamaño de la sublista usada para la parte
+     * izquierda, hasta el penultimo nodo.<br>
+     * &nbsp;&nbsp;&nbsp;<b>d)</b> Repetir los anteriores pasos hasta que las
+     * listas se vacien.<br>
      *
      * @param clavesInOrden Lista de claves in-orden.
      * @param valoresInOrden Lista de valores in-orden.
@@ -47,7 +78,7 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
      * @param usandoPreOrden Valor booleano que es true si se usa el recorrido
      * pre-orden para reconstruir o false si se usa el recorrido post-orden.
      */
-    public ArbolBinarioBusquedaRecursivo(List<K> clavesInOrden,
+    public ABB(List<K> clavesInOrden,
             List<V> valoresInOrden, List<K> clavesNoInOrden,
             List<V> valoresNoInOrden, boolean usandoPreOrden) {
         if (usandoPreOrden) {
@@ -196,20 +227,53 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
     }
 
     /**
-     * Retorna la raiz del arbol.
+     * Constructor por copia.
+     * Copia los valores de un arbol de busqueda binario ya establecido al 
+     * arbol actual del mismo tipo.
+     * @param copiando arbol a copiar valores.
+     */
+    public ABB(ABB<K, V> copiando) {
+        this.raiz = copiarValores(this.raiz, 
+                copiando.raiz);
+    }
+
+    /**
+     * OPerador Auxiliar para el constructor de copia.
+     * @param nodoActualCopia nodo actual al que se copia los valores.
+     * @param nodoActualCopiando nodo actual del que se obtiene los valores.
+     * @return nodo copiado.
+     */
+    private NodoBinario<K, V> copiarValores(NodoBinario<K, V> nodoActualCopia, 
+            NodoBinario<K, V> nodoActualCopiando) {
+        if (NodoBinario.esVacio(nodoActualCopiando)) {
+            return null;
+        }
+        nodoActualCopia = new NodoBinario<>(nodoActualCopiando.getClave(),
+                nodoActualCopiando.getValor());
+        nodoActualCopia.setHijoIzquierdo(copiarValores(
+                nodoActualCopia.getHijoIzquierdo(),
+                nodoActualCopiando.getHijoIzquierdo()));
+        nodoActualCopia.setHijoDerecho(copiarValores(
+                nodoActualCopia.getHijoDerecho(),
+                nodoActualCopiando.getHijoDerecho()));
+        return nodoActualCopia;
+    }
+
+    /**
+     * Retorna la referencia a la raiz del arbol.
      *
      * @return Muestra la raiz (nodo inicial del arbol).
      */
-    public NodoBinario<K, V> getRaiz() {
+    protected NodoBinario<K, V> getRaiz() {
         return raiz;
     }
 
     /**
-     * Ingresa un valor a la raiz del arbol.
+     * Ingresa una referencia a la raiz del arbol.
      *
      * @param raiz valor a insertar como raiz del arbol.
      */
-    public void setRaiz(NodoBinario<K, V> raiz) {
+    protected void setRaiz(NodoBinario<K, V> raiz) {
         this.raiz = raiz;
     }
 
@@ -269,27 +333,36 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
                     + "en el arbol");
         }
         if (claveAEliminar.compareTo(nodoActual.getClave()) == 0) {
-            if(nodoEliminado.getClave() == null){
+            if (nodoEliminado.getClave() == null) {
                 nodoEliminado.setClave(nodoActual.getClave());
                 nodoEliminado.setValor(nodoActual.getValor());
             }
             if (nodoActual.esIncompleto()) {
-                return (!nodoActual.esVacioHijoIzquierdo()) ? nodoActual.getHijoIzquierdo() : nodoActual.getHijoDerecho();
+                return (!nodoActual.esVacioHijoIzquierdo())
+                        ? nodoActual.getHijoIzquierdo()
+                        : nodoActual.getHijoDerecho();
             }
-            NodoBinario<K, V> nodoRemplazo = nodoMenor(nodoActual.getHijoDerecho());
-            nodoActual.setHijoDerecho(eliminar(nodoActual.getHijoDerecho(), nodoRemplazo.getClave(), nodoEliminado));
+            NodoBinario<K, V> nodoRemplazo
+                    = nodoMenor(nodoActual.getHijoDerecho());
+            nodoActual.setHijoDerecho(eliminar(
+                    nodoActual.getHijoDerecho(),
+                    nodoRemplazo.getClave(), nodoEliminado));
             nodoActual.setClave(nodoRemplazo.getClave());
             nodoActual.setValor(nodoRemplazo.getValor());
             return nodoActual;
         }
-        if(claveAEliminar.compareTo(nodoActual.getClave())<0){
-            nodoActual.setHijoIzquierdo(eliminar(nodoActual.getHijoIzquierdo(), claveAEliminar, nodoEliminado));
-        }else{
-            nodoActual.setHijoDerecho(eliminar(nodoActual.getHijoDerecho(), claveAEliminar, nodoEliminado));
+        if (claveAEliminar.compareTo(nodoActual.getClave()) < 0) {
+            nodoActual.setHijoIzquierdo(eliminar(
+                    nodoActual.getHijoIzquierdo(), claveAEliminar,
+                    nodoEliminado));
+        } else {
+            nodoActual.setHijoDerecho(eliminar(
+                    nodoActual.getHijoDerecho(), claveAEliminar,
+                    nodoEliminado));
         }
         return nodoActual;
     }
-    
+
     /**
      * Operacion que permite encontrar el nodo menor desde un nodo determinando.
      *
@@ -302,12 +375,12 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
         }
         return nodoMenor(nodoActual.getHijoIzquierdo());
     }
-    
+
     @Override
     public V buscar(K claveABuscar) {
         return buscar(getRaiz(), claveABuscar);
     }
-    
+
     /**
      * Operacion auxiliar usada en:<br>
      * &nbsp;&nbsp;&nbsp;buscar(ClaveABuscar). <br>
@@ -316,24 +389,25 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
      * @param claveABuscar Clave que se quiere encontrar en el arbol.
      * @return el valor asocioado a la clave.
      */
-    public V buscar(NodoBinario<K, V> nodoActual, K claveABuscar) {
+    private V buscar(NodoBinario<K, V> nodoActual, K claveABuscar) {
         if (NodoBinario.esVacio(nodoActual)) {
             return null;
-        } else if (claveABuscar.compareTo(nodoActual.getClave()) == 0) {
+        }
+        if (claveABuscar.compareTo(nodoActual.getClave()) == 0) {
             return nodoActual.getValor();
-        } else if (claveABuscar.compareTo(nodoActual.getClave()) < 0) {
-            return buscar(nodoActual.getHijoIzquierdo(),
-                    claveABuscar);
+        }
+        if (claveABuscar.compareTo(nodoActual.getClave()) < 0) {
+            return buscar(nodoActual.getHijoIzquierdo(), claveABuscar);
         } else {
             return buscar(nodoActual.getHijoDerecho(), claveABuscar);
         }
     }
-    
+
     @Override
     public boolean contiene(K clave) {
-        return ArbolBinarioBusquedaRecursivo.this.buscar(clave) != null;
+        return buscar(clave) != null;
     }
-    
+
     @Override
     public int size() {
         return size(getRaiz());
@@ -354,10 +428,10 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
                 + size(nodoActual.getHijoDerecho())
                 + 1;
     }
-    
+
     @Override
     public int nivel() {
-        return nivel(raiz);
+        return nivel(getRaiz());
     }
 
     /**
@@ -368,18 +442,9 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
      * @return cantidad de niveles de arbol.
      */
     protected int nivel(NodoBinario<K, V> nodoActual) {
-        if (!NodoBinario.esVacio(nodoActual)) {
-            int izq = nivel(nodoActual.getHijoIzquierdo()) + 1;
-            int der = nivel(nodoActual.getHijoDerecho()) + 1;
-            if (izq > der) {
-                return izq;
-            } else {
-                return der;
-            }
-        }
-        return -1;
+        return (NodoBinario.esVacio(nodoActual)) ? 0 : altura() - 1;
     }
-    
+
     /**
      * Miestra la cantidad de generaciones del arbol contando a partir de uno
      * desde la raiz del arbol.
@@ -388,59 +453,64 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
      */
     @Override
     public int altura() {
-        return nivel(raiz) + 1;
+        return altura(this.raiz);
     }
-    
+
+    protected int altura(NodoBinario<K, V> nodoActual) {
+        if (NodoBinario.esVacio(nodoActual)) {
+            return 0;
+        }
+        int izq = altura(nodoActual.getHijoIzquierdo()) + 1;
+        int der = altura(nodoActual.getHijoDerecho()) + 1;
+        return (izq > der) ? izq : der;
+    }
+
     @Override
     public boolean esVacio() {
         return NodoBinario.esVacio(raiz);
     }
-    
+
     @Override
     public void vaciar() {
         setRaiz((NodoBinario<K, V>) NodoBinario.nodoVacio());
     }
-    
+
+    /*
+    Este recorrido hecho de una manera recursiva es muy inedificiente en 
+    comparacion con su contraparte iterativa.
+     */
     @Override
     public List<K> recorridoPorNiveles() {
         List<K> recorrido = new ArrayList<>();
-        Queue<NodoBinario<K, V>> colaAux = new LinkedList<>();
-        NodoBinario<K, V> nodoActual;
-        /* Si necesitamos saber el nivel declaramos dos variables
-            Una para identificar el nivel
-            Una para contar los nodos en el nivel que estamos 
-         */
-        //int nodosEnNivel;
-        //int nivel = 0;
-
-        //colocamos en una cola la raiz si el arbol no esta vacio.
-        if (!this.esVacio()) {
-            colaAux.add(getRaiz());
-        }
-        //mientras la cola no este vacia...
-        while (!colaAux.isEmpty()) {
-            //Contamos los nodos en el nivel, que son los que estan en la cola
-            //nodosEnNivel = colaAux.size();
-            //mientras no quitemos los nodos del nivel actual no vamos al prox
-            //while (nodosEnNivel > 0) {
-            //visitamos el nodo en el tope de la cola y lo quitamos de ella
-            nodoActual = colaAux.poll();
-            //si tienen nodos hijos los agregamos en orden a la cola
-            if (!nodoActual.esVacioHijoIzquierdo()) {
-                colaAux.add(nodoActual.getHijoIzquierdo());
-            }
-            if (!nodoActual.esVacioHijoDerecho()) {
-                colaAux.add(nodoActual.getHijoDerecho());
-            }
-            //indicamos que eliminamos un nodo del nivel actual de la cola
-            //nodosEnNivel--;
-            //hacemos lo que necesitamos con el nodo visitado
-            recorrido.add(nodoActual.getClave());
-            //}
-            //indicamos que nos movemos al siguiente nivel
-            //nivel++;
+        int nivel = nivel();
+        for (int i = 0; i <= nivel; i++) {
+            recorrerNivel(getRaiz(), i, recorrido);
         }
         return recorrido;
+    }
+
+    /**
+     * Operacion auxiliar usada en:<br>
+     * &nbsp;&nbsp;&nbsp;recorridoPorNiveles(). <br>
+     *
+     * @param nodoActual Nodo que permite desplazarnos por el arbol.
+     * @param nivel Variable de nivel que permite saber cuando se llega a un
+     * nodo del nivel que se quiere visitar.
+     * @param recorrido Lista que se usa para almacenar el orden en que se
+     * visitaron los nodos.
+     */
+    private void recorrerNivel(NodoBinario<K, V> nodoActual, int nivel,
+            List<K> recorrido) {
+        if (!NodoBinario.esVacio(nodoActual)) {
+            if (nivel == 0) {
+                recorrido.add(nodoActual.getClave());
+            } else {
+                recorrerNivel(nodoActual.getHijoIzquierdo(),
+                        nivel - 1, recorrido);
+                recorrerNivel(nodoActual.getHijoDerecho(),
+                        nivel - 1, recorrido);
+            }
+        }
     }
 
     @Override
@@ -467,7 +537,7 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
         recorridoEnPreOrden(nodoActual.getHijoIzquierdo(), recorrido);
         recorridoEnPreOrden(nodoActual.getHijoDerecho(), recorrido);
     }
-    
+
     @Override
     public List<K> recorridoInOrden() {
         List<K> recorrido = new ArrayList<>();
@@ -492,7 +562,7 @@ public class ArbolBinarioBusquedaRecursivo<K extends Comparable<K>, V>
         recorrido.add(raiz.getClave());
         recorridoEnInOrdenR(raiz.getHijoDerecho(), recorrido);
     }
-    
+
     @Override
     public List<K> recorridoPosOrden() {
         List<K> recorrido = new ArrayList<>();

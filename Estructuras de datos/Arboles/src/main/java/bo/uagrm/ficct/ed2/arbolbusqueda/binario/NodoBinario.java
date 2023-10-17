@@ -6,10 +6,7 @@ package bo.uagrm.ficct.ed2.arbolbusqueda.binario;
 
 /**
  * Clase que se usa para implementar un nodo binario usado en arboles binarios
- * de busqueda y avl. <br>
- * Graficamente puede representarse de esta manera: <p>
- * <img src = "imagenes/nodoBinario1.png" style="width:300px" alt = "
-   reresentacion grafica del nodo binario">
+ * de busqueda y avl.
  * 
  * @author OJavierHR
  * @param <K> Tipo de dato (comparable) para la clave.
@@ -18,7 +15,7 @@ package bo.uagrm.ficct.ed2.arbolbusqueda.binario;
 public class NodoBinario<K extends Comparable<K>, V> {
 
     /**
-     * Identificador del nodo que se usara como criterio de busqueda.
+     * Identificador del la "clave" que se usara como criterio de busqueda.
      */
     private K clave;
 
@@ -40,7 +37,7 @@ public class NodoBinario<K extends Comparable<K>, V> {
     private NodoBinario hijoIzquierdo;
 
     /**
-     * Constructor vacio de la clase.
+     * Constructor por "defecto" de la clase.
      */
     public NodoBinario() {
 
@@ -157,8 +154,9 @@ public class NodoBinario<K extends Comparable<K>, V> {
     }
 
     /**
-     * Valida si el nodo es incompleto (no tiene hijos o solo tiene uno)
-     *
+     * Valida si el nodo es incompleto (no tiene hijos o solo tiene uno).
+     * Este metodo es propio de mi y no se contempla en la implementacion hecha
+     * en clases.
      * @return True si el nodo es incompleto.
      */
     public boolean esIncompleto() {
@@ -167,6 +165,9 @@ public class NodoBinario<K extends Comparable<K>, V> {
 
     /**
      * Muestra una representacion de la clase mediante un string.
+     * Es una sobreescritura del metodo "toString()" que remplaza al por
+     * defecto para mostrar una representacion en string de los valores de la
+     * clase.
      *
      * @return String con la representacion del nodo.
      */
@@ -176,14 +177,14 @@ public class NodoBinario<K extends Comparable<K>, V> {
     }
 
     /**
-     * Funcion compartida que valida si el nodo pasado por parametros esta
+     * Funcion "compartida" que valida si el nodo pasado por parametros esta
      * vacio.
      *
      * @param nodo Nodo binario a validar como vacio.
      * @return True si el nodo esta vacio.
      */
     public static boolean esVacio(NodoBinario nodo) {
-        return nodo == null;
+        return nodo == nodoVacio();
     }
 
     /**

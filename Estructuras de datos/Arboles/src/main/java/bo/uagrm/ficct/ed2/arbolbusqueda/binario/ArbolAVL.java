@@ -17,7 +17,7 @@ package bo.uagrm.ficct.ed2.arbolbusqueda.binario;
  * claves.
  * @param <V> Tipo de dato que llevaran los nodos del arbol como dato o datos.
  */
-public class ArbolAVL<K extends Comparable<K>, V> extends ArbolBinarioBusquedaRecursivo<K, V> {
+public class ArbolAVL<K extends Comparable<K>, V> extends ABB<K, V> {
     
     /**
      * 
@@ -121,13 +121,13 @@ public class ArbolAVL<K extends Comparable<K>, V> extends ArbolBinarioBusquedaRe
         final int LIM_INF = -1;
         
         if (!NodoBinario.esVacio(nodoActual)) {
-            int alturaIzq = nivelR(nodoActual.getHijoIzquierdo());
-            int alturaDer = nivelR(nodoActual.getHijoDerecho());
+            int alturaIzq = nivel(nodoActual.getHijoIzquierdo());
+            int alturaDer = nivel(nodoActual.getHijoDerecho());
             int diferencia = alturaIzq - alturaDer;
             if ((diferencia > LIM_SUP)) {
                 NodoBinario<K, V> hijoIzquierdo = nodoActual.getHijoIzquierdo();
-                alturaIzq = nivelR(hijoIzquierdo.getHijoIzquierdo());
-                alturaDer = nivelR(hijoIzquierdo.getHijoDerecho());
+                alturaIzq = nivel(hijoIzquierdo.getHijoIzquierdo());
+                alturaDer = nivel(hijoIzquierdo.getHijoDerecho());
                 if (alturaDer > alturaIzq) {
                     return rotacionDobleDerecha(nodoActual);
                 } else {
@@ -135,8 +135,8 @@ public class ArbolAVL<K extends Comparable<K>, V> extends ArbolBinarioBusquedaRe
                 }
             } else if (diferencia < LIM_INF) {
                 NodoBinario<K, V> hijoDerecho = nodoActual.getHijoDerecho();
-                alturaIzq = nivelR(hijoDerecho.getHijoIzquierdo());
-                alturaDer = nivelR(hijoDerecho.getHijoDerecho());
+                alturaIzq = nivel(hijoDerecho.getHijoIzquierdo());
+                alturaDer = nivel(hijoDerecho.getHijoDerecho());
                 if (alturaIzq > alturaDer) {
                     return rotacionDobleIzquierda(nodoActual);
                 } else {
