@@ -82,10 +82,10 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
             List<V> valoresInOrden, List<K> clavesNoInOrden,
             List<V> valoresNoInOrden, boolean usandoPreOrden) {
         if (usandoPreOrden) {
-            this.raiz = reconstruirConPreOrden(clavesInOrden, valoresInOrden,
+            this.raiz = reconstruirConPreOrden(clavesInOrden,
                     clavesNoInOrden, valoresNoInOrden);
         } else {
-            this.raiz = reconstruirConPostOrden(clavesInOrden, valoresInOrden,
+            this.raiz = reconstruirConPostOrden(clavesInOrden,
                     clavesNoInOrden, valoresNoInOrden);
         }
     }
@@ -104,8 +104,7 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
      * @param valoresPreOrden Lista con los valores pre-orden.
      * @return Arbol binario reconstruido con el recorrido pre-preorden.
      */
-    private NodoBinario<K, V> reconstruirConPreOrden(List<K> clavesInOrden,
-            List<V> valoresInOrden, List<K> clavesPreOrden,
+    private NodoBinario<K, V> reconstruirConPreOrden(List<K> clavesInOrden, List<K> clavesPreOrden,
             List<V> valoresPreOrden) {
         if (clavesInOrden.isEmpty()) {
             return (NodoBinario<K, V>) NodoBinario.nodoVacio();
@@ -114,35 +113,23 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
             V valorPadre = valoresPreOrden.get(0);
             int posicionClaveInOrden = indiceDeClave(clavePadre,
                     clavesInOrden);
-            //parte izquierda
-            List<K> clavesInOrdeIzq = clavesInOrden.subList(0,
-                    posicionClaveInOrden);
-            List<V> valoresInOrdeIzq = valoresInOrden.subList(0,
-                    posicionClaveInOrden);
-            List<K> clavesPreOrdeIzq = clavesPreOrden.subList(1,
-                    posicionClaveInOrden + 1);
-            List<V> valoresPreOrdeIzq = valoresPreOrden.subList(1,
-                    posicionClaveInOrden + 1);
-            //parte derecha
-            List<K> clavesInOrdeDer = clavesInOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
-            List<V> valoresInOrdeDer = valoresInOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
-            List<K> clavesPreOrdeDer = clavesPreOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
-            List<V> valoresPreOrdeDer = valoresPreOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
             //armamos
             NodoBinario<K, V> nodoPadre = new NodoBinario<>(clavePadre,
                     valorPadre);
             nodoPadre.setHijoIzquierdo(reconstruirConPreOrden(
-                    clavesInOrdeIzq, valoresInOrdeIzq,
-                    clavesPreOrdeIzq, valoresPreOrdeIzq)
-            );
+                    clavesInOrden.subList(0,
+                    posicionClaveInOrden), 
+                    clavesPreOrden.subList(1,
+                    posicionClaveInOrden + 1), 
+                    valoresPreOrden.subList(1,
+                    posicionClaveInOrden + 1)));
             nodoPadre.setHijoDerecho(reconstruirConPreOrden(
-                    clavesInOrdeDer, valoresInOrdeDer,
-                    clavesPreOrdeDer, valoresPreOrdeDer)
-            );
+                    clavesInOrden.subList(posicionClaveInOrden + 1, 
+                            clavesInOrden.size()), 
+                    clavesPreOrden.subList(
+                    posicionClaveInOrden + 1, clavesInOrden.size()), 
+                    valoresPreOrden.subList(
+                    posicionClaveInOrden + 1, clavesInOrden.size())));
             return nodoPadre;
         }
     }
@@ -162,8 +149,7 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
      * @return Arbol binario reconstruido con el recorrido pre-preorden.
      */
     private NodoBinario<K, V> reconstruirConPostOrden(List<K> clavesInOrden,
-            List<V> valoresInOrden, List<K> clavesPostOrden,
-            List<V> valoresPostOrden) {
+            List<K> clavesPostOrden, List<V> valoresPostOrden) {
         if (clavesInOrden.isEmpty()) {
             return (NodoBinario<K, V>) NodoBinario.nodoVacio();
         } else {
@@ -171,35 +157,23 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
             V valorPadre = valoresPostOrden.get(valoresPostOrden.size() - 1);
             int posicionClaveInOrden = indiceDeClave(clavePadre,
                     clavesInOrden);
-            //parte izquierda
-            List<K> clavesInOrdeIzq = clavesInOrden.subList(0,
-                    posicionClaveInOrden);
-            List<V> valoresInOrdeIzq = valoresInOrden.subList(0,
-                    posicionClaveInOrden);
-            List<K> clavesPostOrdeIzq = clavesPostOrden.subList(0,
-                    posicionClaveInOrden);
-            List<V> valoresPostOrdenIzq = valoresPostOrden.subList(0,
-                    posicionClaveInOrden);
-            //parte derecha
-            List<K> clavesInOrdeDer = clavesInOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
-            List<V> valoresInOrdeDer = valoresInOrden.subList(
-                    posicionClaveInOrden + 1, clavesInOrden.size());
-            List<K> clavesPostOrdenDer = clavesPostOrden.subList(
-                    posicionClaveInOrden, clavesInOrden.size() - 1);
-            List<V> valoresPostOrdenDer = valoresPostOrden.subList(
-                    posicionClaveInOrden, clavesInOrden.size() - 1);
             //armamos
             NodoBinario<K, V> nodoPadre = new NodoBinario<>(clavePadre,
                     valorPadre);
             nodoPadre.setHijoIzquierdo(reconstruirConPostOrden(
-                    clavesInOrdeIzq, valoresInOrdeIzq,
-                    clavesPostOrdeIzq,
-                    valoresPostOrdenIzq));
+                    clavesInOrden.subList(0,
+                    posicionClaveInOrden),
+                    clavesPostOrden.subList(0,
+                    posicionClaveInOrden),
+                    valoresPostOrden.subList(0,
+                    posicionClaveInOrden)));
             nodoPadre.setHijoDerecho(reconstruirConPostOrden(
-                    clavesInOrdeDer, valoresInOrdeDer,
-                    clavesPostOrdenDer,
-                    valoresPostOrdenDer));
+                    clavesInOrden.subList(
+                    posicionClaveInOrden + 1, clavesInOrden.size()),
+                    clavesPostOrden.subList(
+                    posicionClaveInOrden, clavesInOrden.size() - 1),
+                    valoresPostOrden.subList(
+                    posicionClaveInOrden, clavesInOrden.size() - 1)));
             return nodoPadre;
         }
     }
@@ -333,7 +307,7 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
                     + "en el arbol");
         }
         if (claveAEliminar.compareTo(nodoActual.getClave()) == 0) {
-            if (nodoEliminado.getClave() == null) {
+            if (nodoEliminado.getClave() != NodoBinario.nodoVacio()) {
                 nodoEliminado.setClave(nodoActual.getClave());
                 nodoEliminado.setValor(nodoActual.getValor());
             }

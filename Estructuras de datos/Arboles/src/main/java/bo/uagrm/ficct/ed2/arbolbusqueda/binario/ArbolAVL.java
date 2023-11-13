@@ -19,11 +19,6 @@ package bo.uagrm.ficct.ed2.arbolbusqueda.binario;
  */
 public class ArbolAVL<K extends Comparable<K>, V> extends ABB<K, V> {
     
-    /**
-     * 
-     * @param clave
-     * @param valor 
-     */
     @Override
     public void insertar(K clave, V valor){
         setRaiz(insertar(getRaiz(), clave, valor));
@@ -153,7 +148,7 @@ public class ArbolAVL<K extends Comparable<K>, V> extends ABB<K, V> {
     }
     
     private NodoBinario<K, V> rotacionDobleIzquierda(NodoBinario<K, V> nodoActual) {
-        nodoActual.setHijoDerecho(rotacionDobleDerecha(nodoActual.getHijoDerecho()));
+        nodoActual.setHijoDerecho(rotacionSimpleDerecha(nodoActual.getHijoDerecho()));
         return rotacionSimpleizquierda(nodoActual);
     }
 
