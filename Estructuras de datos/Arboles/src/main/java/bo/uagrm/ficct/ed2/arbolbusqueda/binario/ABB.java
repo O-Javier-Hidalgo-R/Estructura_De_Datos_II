@@ -538,7 +538,7 @@ public class ABB<K extends Comparable<K>, V> implements IArbolBusqueda<K, V> {
     }
 
     @Override
-    public List<K> recorridoPosOrden() {
+    public List<K> recorridoPostOrden() {
         List<K> recorrido = new ArrayList<>();
         recorridoEnPosOrdenR(getRaiz(), recorrido);
         return recorrido;

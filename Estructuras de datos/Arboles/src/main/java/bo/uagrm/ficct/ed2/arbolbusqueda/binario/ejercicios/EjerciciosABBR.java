@@ -336,7 +336,7 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         System.out.println(recorridoPorNiveles());
         System.out.println(recorridoPreOrden());
         System.out.println(recorridoInOrden());
-        System.out.println(recorridoPosOrden());
+        System.out.println(recorridoPostOrden());
         System.out.println(nivel());
     }
 }

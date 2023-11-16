@@ -69,30 +69,9 @@ public class ArbolMVias<K extends Comparable<K>, V>
 
     @Override
     public List<K> recorridoPorNiveles() {
-        List<K> result = new LinkedList<>();
-        Queue<NodoNVias> cola = new LinkedList<>();
-        int nodosNivel;
-        NodoNVias<K, V> nodoActual = raiz;
-
-        if (NodoNVias.esVacio(raiz)) {
-            return null;
-        }
-
-        cola.add(raiz);
-        while (!cola.isEmpty()) {
-            nodosNivel = cola.size();
-            while (nodosNivel > 0) {
-                nodoActual = cola.poll();
-                for (int i = 0; i < nodoActual.cantidadDeClavesNoVacias() + 1; i++) {
-                    if (!nodoActual.esHijoVacio(i)) {
-                        cola.add(nodoActual.getHijo(i));
-                    }
-                }
-                result = colocarClavesLista(nodoActual, result);
-                nodosNivel--;
-            }
-        }
-        return result;
+        List<K> recorrido = new ArrayList<>();
+        recorridoPorNiveles(recorrido);
+        return recorrido;
     }
 
     @Override
@@ -105,19 +84,13 @@ public class ArbolMVias<K extends Comparable<K>, V>
     @Override
     public List<K> recorridoInOrden() {
         List<K> result = new ArrayList<>();
-        if (NodoNVias.esVacio(raiz)) {
-            return null;
-        }
         recorridoInOrden(raiz, result);
         return result;
     }
 
     @Override
-    public List<K> recorridoPosOrden() {
+    public List<K> recorridoPostOrden() {
         List<K> result = new ArrayList<>();
-        if (NodoNVias.esVacio(raiz)) {
-            return null;
-        }
         recorridoPostOrden(raiz, result);
         return result;
     }
@@ -234,6 +207,33 @@ public class ArbolMVias<K extends Comparable<K>, V>
             return datosMayores(nodoActual.getHijo(i));
         }
         return new parClaveValor<>(nodoActual.getClave(i - 1), nodoActual.getValor(i - 1));
+    }
+
+    private void recorridoPorNiveles(List<K> recorrido) {
+        Queue<NodoNVias<K, V>> colaNodos = new LinkedList<>();
+        int nodosEnNivel;
+        int nivel = 0;
+        colaNodos.add(this.raiz);
+        while(!colaNodos.isEmpty()){
+            nodosEnNivel = colaNodos.size();
+            NodoNVias<K, V> nodoVisitado;
+            while(nodosEnNivel > 0){
+                nodoVisitado = colaNodos.poll();
+                colocarClavesLista(nodoVisitado, recorrido);
+                colarHijos(nodoVisitado, colaNodos);
+                nodosEnNivel--;
+            }
+            nivel++;
+        }
+    }
+
+    private void colarHijos(NodoNVias<K, V> nodoVisitado, Queue<NodoNVias<K, V>> colaNodos) {
+        int lim = nodoVisitado.cantidadDeClavesNoVacias();
+        for (int i = 0; i <= lim; i++) {
+            if(nodoVisitado.getHijo(i) != NodoNVias.nodoVacio()){
+                colaNodos.add(nodoVisitado.getHijo(i));
+            }
+        }
     }
 
     private class parClaveValor<K extends Comparable<K>, V> {
@@ -397,31 +397,31 @@ public class ArbolMVias<K extends Comparable<K>, V>
         }
     }
 
-    private void recorridoInOrden(NodoNVias<K, V> nodoActual, List<K> result) {
-        for (int i = 0; i < nodoActual.cantidadDeClavesNoVacias(); i++) {
-            if (!NodoNVias.esVacio(nodoActual.getHijo(i))) {
-                recorridoInOrden(nodoActual.getHijo(i), result);
-            }
-            result.add(nodoActual.getClave(i));
+    private void recorridoInOrden(NodoNVias<K, V> nodoActual, List<K> recorridoInOrden) {
+        if(NodoNVias.esVacio(nodoActual)){
+            return;
         }
-        if (!NodoNVias.esVacio(nodoActual.getHijo(nodoActual.cantidadDeClavesNoVacias()))) {
-            recorridoInOrden(nodoActual.getHijo(nodoActual.cantidadDeClavesNoVacias()), result);
+        int lim = nodoActual.cantidadDeClavesNoVacias();
+        for (int i = 0; i < lim; i++) {
+            recorridoInOrden(nodoActual.getHijo(i), recorridoInOrden);
+            recorridoInOrden.add(nodoActual.getClave(i));
+        }
+        if(nodoActual.getHijo(lim)!= NodoNVias.nodoVacio()){
+            recorridoInOrden(nodoActual.getHijo(lim), recorridoInOrden);
         }
     }
 
-    private void recorridoPostOrden(NodoNVias<K, V> nodoActual, List<K> result) {
-        if (!nodoActual.esHijoVacio(0)) {
-            recorridoPostOrden(nodoActual.getHijo(0), result);
+    private void recorridoPostOrden(NodoNVias<K, V> nodoActual, List<K> recorridoPostOrden) {
+        if(NodoNVias.esVacio(nodoActual)){
+            return;
         }
-        if (!nodoActual.esHijoVacio(1)) {
-            recorridoPostOrden(nodoActual.getHijo(1), result);
+        int lim = nodoActual.cantidadDeClavesNoVacias();
+        if(nodoActual.getHijo(0)!=NodoNVias.nodoVacio()){
+            recorridoPostOrden(nodoActual.getHijo(0), recorridoPostOrden);
         }
-        result.add(nodoActual.getClave(0));
-        for (int i = 1; i < nodoActual.cantidadDeClavesNoVacias(); i++) {
-            if (!nodoActual.esHijoVacio(i + 1)) {
-                recorridoPostOrden(nodoActual.getHijo(i + 1), result);
-            }
-            result.add(nodoActual.getClave(i));
+        for (int i = 0; i < lim; i++) {
+            recorridoPostOrden(nodoActual.getHijo(i+1), recorridoPostOrden);
+            recorridoPostOrden.add(nodoActual.getClave(i));
         }
     }
 

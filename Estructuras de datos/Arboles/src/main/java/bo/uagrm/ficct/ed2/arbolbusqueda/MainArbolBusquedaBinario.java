@@ -4,6 +4,7 @@
  */
 package bo.uagrm.ficct.ed2.arbolbusqueda;
 
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolB;
 import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
 
 
@@ -14,8 +15,8 @@ import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
 public class MainArbolBusquedaBinario {
 
     public static void main(String[] args) {
-        IArbolBusqueda<Integer, String> aB = new ArbolMVias<>(4);
-        aB.insertar(80, "A");
+        IArbolBusqueda<Integer, String> aB = new ArbolB<>(4);
+        /*aB.insertar(80, "A");
         aB.insertar(120, "B");
         aB.insertar(200, "C");
         aB.insertar(50, "D");
@@ -34,8 +35,24 @@ public class MainArbolBusquedaBinario {
         aB.insertar(160, "P");
         aB.insertar(170, "Q");
         aB.insertar(190, "R");
-        aB.insertar(158, "S");
+        aB.insertar(158, "S");*/
+        aB.insertar(300, "A");
+        aB.insertar(500, "B");
+        aB.insertar(100, "C");
+        aB.insertar(50, "D");
+        aB.insertar(400, "E");
+        aB.insertar(800, "F");
+        aB.insertar(90, "G");
+        aB.insertar(91, "H");
+        aB.insertar(70, "I");
+        aB.insertar(75, "J");
+        aB.insertar(99, "K");
         
+        System.out.println(aB.recorridoPorNiveles());
+        System.out.println(aB.recorridoPreOrden());
+        
+        aB.eliminar(90);
+        System.out.println(aB.recorridoPorNiveles());
         System.out.println(aB.recorridoPreOrden());
     }
 }

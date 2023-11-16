@@ -388,7 +388,7 @@ public class ArbolBinarioBusquedaIterativo<K extends Comparable<K>, V>
     return recorrido;
     }*/
     @Override
-    public List<K> recorridoPosOrden() {
+    public List<K> recorridoPostOrden() {
         List<K> recorrido = new ArrayList<>();
         if (this.esVacio()) {
             return recorrido;

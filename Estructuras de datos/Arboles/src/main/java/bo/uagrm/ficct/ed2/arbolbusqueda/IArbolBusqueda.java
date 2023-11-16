@@ -121,7 +121,7 @@ public interface IArbolBusqueda<K extends Comparable<K>, V> {
      *
      * @return List con las claves del recorrido.
      */
-    List<K> recorridoPosOrden();
+    List<K> recorridoPostOrden();
     
     /**
      * Retorna una lista con las claves de los nodos recorriendo el arbol
