@@ -1,0 +1,282 @@
+[
+  {
+    "key": 9788415913481,
+    "valor": {
+      "title": "LA GITANILLA",
+      "date": "2019-09-16",
+      "author": "Miguel de Cervantes Saavedra",
+      "categoriesList": [
+        "Literatura",
+        "Clasicos"
+      ],
+      "publisher": "NIVOLA LIBROS Y EDICIONES",
+      "description": "La protagonista principal de la narración es Preciosa, una gitanilla de quince años, hermosa e inteligente, que vive con su abuela. Pasea con sus compañeras y canta romances en las calles madrileñas a cambio de algunas monedas. Pronto es conocida en la ciudad por su belleza, gracia y buen juicio; ella siempre sabe responder con las palabras adecuadas y sorprende a todos por su sabiduría, tan impropia en alguien de su edad.",
+      "language": "CASTELLANO",
+      "pages": 144,
+      "stock": 15,
+      "available": 15
+    }
+  },
+  {
+    "key": 9781449370770,
+    "valor": {
+      "title": "Java 8 Lambdas",
+      "date": "2014-05-06",
+      "author": "Richard Warburton",
+      "categoriesList": [
+        "Educación",
+        "Programación",
+        "Java"
+      ],
+      "publisher": "O\u0027Reilly Media-1th edition",
+      "description": "If you’re a developer with core Java SE skills, this hands-on book takes you through the language changes in Java 8 triggered by the addition of lambda expressions. You’ll learn through code examples, exercises, and fluid explanations how these anonymous functions will help you write simple, clean, library-level code that solves business problems.",
+      "language": "INGLÉS",
+      "pages": 180,
+      "stock": 20,
+      "available": 20
+    }
+  },
+  {
+    "key": 9788466236645,
+    "valor": {
+      "title": "DON QUIJOTE DE LA MANCHA",
+      "date": "2016-11-04",
+      "author": "Miguel de Cervantes Saavedra",
+      "categoriesList": [
+        "Literatura",
+        "Clasicos"
+      ],
+      "publisher": "LIBSA",
+      "description": "Aquí descubriremos al loco más lúcido de la historia de la literatura, tanto que recorriendo un lugar de la mancha, inventó su propia realidad para huir del mundo que le rodeaba.",
+      "language": "CASTELLANO",
+      "pages": 640,
+      "stock": 15,
+      "available": 15
+    }
+  },
+  {
+    "key": 9780596527754,
+    "valor": {
+      "title": "Java Generics and Collections",
+      "date": "2006-11-21",
+      "author": "Maurice Naftalin",
+      "categoriesList": [
+        "Educación",
+        "Programación",
+        "Java"
+      ],
+      "publisher": "O\u0027Reilly Media-1th edition",
+      "description": "This comprehensive guide shows you how to master the most important changes to Java since it was first released. Generics and the greatly expanded collection libraries have tremendously increased the power of Java 5 and Java 6. But they have also confused many developers who haven\u0027t known how to take advantage of these new features.",
+      "language": "INGLÉS",
+      "pages": 273,
+      "stock": 20,
+      "available": 20
+    }
+  },
+  {
+    "key": 9788415618775,
+    "valor": {
+      "title": "EL PERRO DE LOS BASKERVILLE",
+      "date": "2021-11-24",
+      "author": "Arthur Conan Doyle",
+      "categoriesList": [
+        "Literatura",
+        "Novela",
+        "negra",
+        "Misterio",
+        "Policial"
+      ],
+      "publisher": "ALMA EUROPA",
+      "description": "Después de que sir Charles Baskerville aparezca muerto en extrañas circunstancias, su médico solicitará los servicios de Holmes. Aunque los habitantes del condado creen que el noble ha sido víctima del sabueso infernal que ha hostigado a su linaje generación tras generación, el detective tratará de no permitir que las supercherías enturbien su juicio analítico para desenmascarar al asesino de sir Baskerville.“No es cuestión de lo que sabemos, sino de lo que podemos demostrar.",
+      "language": "CASTELLANO",
+      "pages": 192,
+      "stock": 20,
+      "available": 20
+    }
+  },
+  {
+    "key": 9788441539907,
+    "valor": {
+      "title": "Arquitectura limpia: Guía para especialistas en la estructura y el diseño de software",
+      "date": "2018-03-01",
+      "author": "Robert C. Martin",
+      "categoriesList": [
+        "Educación",
+        "Programación"
+      ],
+      "publisher": "ANAYA MULTIMEDIA",
+      "description": "Aplicando unas reglas universales de la arquitectura de software, podrá mejorar tremendamente la productividad en la implementación de cualquier programa. ",
+      "language": "CASTELLANO",
+      "pages": 320,
+      "stock": 12,
+      "available": 12
+    }
+  },
+  {
+    "key": 9798840562086,
+    "valor": {
+      "title": "El lenguaje de programación Python de principio a fin",
+      "date": "2022-07-13",
+      "author": "Angel Pablo Hinojosa Gutiérrez",
+      "categoriesList": [
+        "Educación",
+        "Programacón",
+        "Python"
+      ],
+      "publisher": "Independently published",
+      "description": "A lo largo de sus más de setecientas páginas, se detallan todos los aspectos de la versión más moderna y actualizada de este lenguaje. Paso a paso, avanza desde los temas fundamentales, como la sintaxis del lenguaje o el uso de las funciones y clases nativas, hasta los conceptos más avanzados, como la programación asíncrona, el manejo de bases de datos o el desarrollo de interfaces gráficas.",
+      "language": "CASTELLANO",
+      "pages": 744,
+      "stock": 13,
+      "available": 13
+    }
+  },
+  {
+    "key": 9781324001805,
+    "valor": {
+      "title": "The Iliad",
+      "date": "2023-08-26",
+      "author": "Homer",
+      "categoriesList": [
+        "Literatura",
+        "Ficción",
+        "Clasicos"
+      ],
+      "publisher": "W. W. Norton \u0026 Company",
+      "description": "The Iliad roars with the clamor of arms, the bellowing boasts of victors, the fury and grief of loss, and the anguished cries of dying men. It sings, too, of the sublime magnitude of the world―the fierce beauty of nature and the gods’ grand schemes beyond the ken of mortals. In Wilson’s hands, this thrilling, magical, and often horrifying tale now gallops at a pace befitting its legendary battle scenes, in crisp but resonant language that evokes the poem’s deep pathos and reveals palpably real, even “complicated,” characters―both human and divine.",
+      "language": "INGLÉS",
+      "pages": 848,
+      "stock": 12,
+      "available": 12
+    }
+  },
+  {
+    "key": 9781607102113,
+    "valor": {
+      "title": "THE ADVENTURES OF SHERLOCK HOLMES AND OTHER STORIES",
+      "date": "2021-11-24",
+      "author": "Arthur Conan Doyle",
+      "categoriesList": [
+        "Policial"
+      ],
+      "publisher": "CANTERBURY CLASSICS",
+      "description": "There is one literary detective who stands above all others, whose powers of deduction are known the world over, whose influence can still be felt in today\u0027s most modern whodunits. Who is it, you ask? Why, it\u0027s elementary! Sherlock Holmes, the famous gumshoe of 221B Baker Street. And Sir Arthur Conan Doyle--the man who made him famous in such tales as The Hound of the Baskervilles and A Study in Scarlet--changed the world of mysteries, inspiring legions of devoted fans.",
+      "language": "INGLÉS",
+      "pages": 120,
+      "stock": 20,
+      "available": 20
+    }
+  },
+  {
+    "key": 9788415618874,
+    "valor": {
+      "title": "ESTUDIO EN ESCARLATA. EL SIGNO DE LOS CUATRO",
+      "date": "2018-06-22",
+      "author": "Arthur Conan Doyle",
+      "categoriesList": [
+        "Literatura",
+        "Novela",
+        "negra",
+        "Misterio",
+        "Policial"
+      ],
+      "publisher": "ALMA EUROPA ",
+      "description": "El cadáver de Enoch Drebber, hallado en extrañas circunstancias en una casa deshabitada, provoca que los agentes de Scotland Yard investiguen en la dirección equivocada. Un nuevo asesinato lo complica todo aún más. Para resolver el misterio, Holmes y Watson deberán remontarse en el tiempo a otros asesinatos ocurridos 30 años atrás en la ciudad mormona de Salt Lake City.",
+      "language": "CASTELLANO",
+      "pages": 288,
+      "stock": 15,
+      "available": 15
+    }
+  },
+  {
+    "key": 9788418174193,
+    "valor": {
+      "title": "EL PRINCIPITO",
+      "date": "2021-05-04",
+      "author": "Antoine de Saint Exupery",
+      "categoriesList": [
+        "Literatura",
+        "Infantil"
+      ],
+      "publisher": "SALAMANDRA",
+      "description": "Fábula mítica y relato filosófico que interroga acerca de la relación del ser humano con su prójimo y con el mundo, El Principito  concentra, con maravillosa simplicidad, la constante reflexión de  Saint-Exupery sobre la amistad, el amor y el sentido de la vida.",
+      "language": "CASTELLANO",
+      "pages": 96,
+      "stock": 5,
+      "available": 5
+    }
+  },
+  {
+    "key": 9788445006757,
+    "valor": {
+      "title": "¿SUEÑAN LOS ANDROIDES CON OVEJAS ELECTRICAS?",
+      "date": "2019-10-22",
+      "author": "Philip K. Dick",
+      "categoriesList": [
+        "Literatura",
+        "Ciencia-Ficcion"
+      ],
+      "publisher": "MINOTAURO",
+      "description": "Las empresas fabrican incluso seres humanos. Rick Deckard es un cazarrecompensas cuyo trabajo es encontrar androides rebeldes y retirarlos, pero la tarea no será tan sencilla cuando tenga que enfrentarse a los nuevos modelos Nexus-6, prácticamente indistinguibles de los seres humanos.",
+      "language": "CASTELLANO",
+      "pages": 288,
+      "stock": 10,
+      "available": 10
+    }
+  },
+  {
+    "key": 9798800165043,
+    "valor": {
+      "title": "Clean JavaScript",
+      "date": "2022-04-10",
+      "author": "Miguel A. Gómez",
+      "categoriesList": [
+        "Educación",
+        "Programación",
+        "JavaScript"
+      ],
+      "publisher": "Independently published",
+      "description": "JavaScript se ha convertido en uno de los lenguajes más utilizados del mundo, se encuentra en infraestructuras críticas de empresas muy importantes (Facebook, Netflix o Uber lo utilizan). Por esta razón, se ha vuelto indispensable la necesidad de escribir código de mayor calidad y legibilidad.",
+      "language": "CASTELLANO",
+      "pages": 169,
+      "stock": 20,
+      "available": 20
+    }
+  },
+  {
+    "key": 9788418037542,
+    "valor": {
+      "title": "TRILOGIA FUNDACION",
+      "date": "2022-04-07",
+      "author": "Isaac Asimov",
+      "categoriesList": [
+        "Literaruta",
+        "Ciencia-Ficcion"
+      ],
+      "publisher": "NOVA",
+      "description": "Isaac Asimov empezó a escribir la saga de la Fundación a los veintiún  años, sin saber que un día esta obra se convertiría en la piedra angular  de la ciencia ficción del siglo XX, ni que con ella cautivaría a lectores de todas las edades durante más de siete decadas.",
+      "language": "CASTELLANO",
+      "pages": 832,
+      "stock": 16,
+      "available": 16
+    }
+  },
+  {
+    "key": 9788435018364,
+    "valor": {
+      "title": "YO, ROBOT",
+      "date": "2009-06-01",
+      "author": "Isaac Asimov",
+      "categoriesList": [
+        "Literatura",
+        "Ciencia-Ficcion"
+      ],
+      "publisher": "EDHASA",
+      "description": "Aquí formuló Issac Asomov por primera vez las tres leyes fundamentales de la robótica, de las que se valdría para plantear interrogantes que se adentran en el campo de la ética y de la psicología: ¿ qué diferencia hay entre un robot inteligente y un ser humano?, ¿puede el creador de un robot predecir su comportamiento? , ¿ debe la lógica determinar lo que es mejor para la humanidad? A través de una serie de historias conectadas entre sí por el personaje de la robopsicóloga Susan Calvin, en las que aparecen todo tipo de máquinas inteligentes",
+      "language": "CASTELLANO",
+      "pages": 328,
+      "stock": 15,
+      "available": 15
+    }
+  }
+]

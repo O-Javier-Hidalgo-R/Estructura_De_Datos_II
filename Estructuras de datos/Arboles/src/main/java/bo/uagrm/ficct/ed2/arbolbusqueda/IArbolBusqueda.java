@@ -43,10 +43,11 @@ public interface IArbolBusqueda<K extends Comparable<K>, V> {
      *
      * @param claveAEliminar Clave que se quiere eliminar del arbol de busqueda
      * @return Valor del nodo eliminado.
+     * @throws bo.uagrm.ficct.ed2.arbolbusqueda.ClaveNoEncontrada
      * @throws IllegalArgumentException Excepcion en tiempo de ejecucion que se
      * invoca cuando la clave a eliminar no existe en el arbol.
      */
-    V eliminar(K claveAEliminar) throws IllegalArgumentException;
+    V eliminar(K claveAEliminar) throws ClaveNoEncontrada;
 
     /**
      * Retorna el valor del nodo con la clave especificada.
