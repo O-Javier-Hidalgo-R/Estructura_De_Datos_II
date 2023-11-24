@@ -47,17 +47,16 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
 
     private boolean tieneNodosCompletosEnNivel(NodoBinario<K, V> nodoActual,
             int nivel) {
-        if (NodoBinario.esVacio(super.getRaiz())) {
+        if(NodoBinario.esVacio(nodoActual)){
             return false;
         }
-        if (nivel == 0) {
+        if((nivel == 0)){
             return !nodoActual.esIncompleto();
         }
-        boolean parIzq = tieneNodosCompletosEnNivel(
-                nodoActual.getHijoIzquierdo(), nivel - 1);
-        boolean parDer = tieneNodosCompletosEnNivel(
-                nodoActual.getHijoDerecho(), nivel - 1);
-        return parIzq && parDer;
+        return tieneNodosCompletosEnNivel(
+                nodoActual.getHijoIzquierdo(), nivel-1) &&
+                tieneNodosCompletosEnNivel(
+                        nodoActual.getHijoDerecho(), nivel-1);
     }
 
     /*
@@ -90,14 +89,14 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         if (NodoBinario.esVacio(nodoActual)) {
             return 0;
         }
-        if (nivel <= 0) {
+        if (nivel == 0) {
             if (nodoActual.esHoja()) {
                 return 1;
             }
             return 0;
         }
-        int parIzq = contarHojas(nodoActual.getHijoIzquierdo());
-        int parDer = contarHojas(nodoActual.getHijoDerecho());
+        int parIzq = contarHojasNivel(nodoActual.getHijoIzquierdo(), nivel-1);
+        int parDer = contarHojasNivel(nodoActual.getHijoDerecho(), nivel - 1);
         return parIzq + parDer;
     }
 
@@ -106,6 +105,7 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         nivel n
      */
     public List<K> mostrarNodosMenosN(int nivel) {
+        //De ser necesario implementar control para niveles invalidos.
         return mostrarNodosMenosN(super.getRaiz(), nivel);
     }
 
@@ -123,19 +123,15 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
 
     private void recorrerNivel(NodoBinario<K, V> raiz, int nivel,
             List<K> result) {
-        if (NodoBinario.esVacio(raiz) || nivel < 0) {
+        if (NodoBinario.esVacio(raiz)) {
             return;
         }
         if (nivel == 0) {
             result.add(raiz.getClave());
+            return;
         }
-        if (!raiz.esVacioHijoIzquierdo()) {
-            recorrerNivel(raiz.getHijoIzquierdo(), nivel - 1, result);
-        }
-        if (!raiz.esVacioHijoDerecho()) {
-            recorrerNivel(raiz.getHijoDerecho(), nivel - 1, result);
-        }
-
+        recorrerNivel(raiz.getHijoIzquierdo(), nivel - 1, result);
+        recorrerNivel(raiz.getHijoDerecho(), nivel - 1, result);
     }
 
     /*
@@ -327,16 +323,14 @@ public class EjerciciosABBR<K extends Comparable<K>, V>
         
         aBBR.mostrar();
         
-        EjerciciosABBR<Integer, String> x = aBBR.reflejo();
-        
-        x.mostrar();
+        System.out.println(aBBR.mostrarNodosMenosN(4));
     }
 
     private void mostrar() {
-        System.out.println(recorridoPorNiveles());
+        /*System.out.println(recorridoPorNiveles());
         System.out.println(recorridoPreOrden());
         System.out.println(recorridoInOrden());
         System.out.println(recorridoPostOrden());
-        System.out.println(nivel());
+        System.out.println(nivel());*/
     }
 }
