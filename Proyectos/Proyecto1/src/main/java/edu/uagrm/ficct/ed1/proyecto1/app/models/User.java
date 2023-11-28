@@ -1,76 +1,82 @@
 package edu.uagrm.ficct.ed1.proyecto1.app.models;
 
 public class User {
-    private int id;
     private String name;
-    private String last_name_p;
-    private String last_name_m;
-    private String domicilio;
-    private String tel;
+    private String fistLastName;
+    private String secondLastName;
+    private String addres;
+    private String phone;
     private int sanctions;
     private int sanc_money;
 
-    public void setId(int id) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String name, String fistLastName, String secondLastName, String addres, String phone, int sanctions, int sanc_money) {
+        this.name = name;
+        this.fistLastName = fistLastName;
+        this.secondLastName = secondLastName;
+        this.addres = addres;
+        this.phone = phone;
+        this.sanctions = sanctions;
+        this.sanc_money = sanc_money;
+    }
+    
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLast_name_p(String last_name_p) {
-        this.last_name_p = last_name_p;
+    public String getFistLastName() {
+        return fistLastName;
     }
 
-    public void setLast_name_m(String last_name_m) {
-        this.last_name_m = last_name_m;
+    public void setFistLastName(String fistLastName) {
+        this.fistLastName = fistLastName;
     }
 
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
+    public String getSecondLastName() {
+        return secondLastName;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
-    public void setSanctions(int sanctions) {
-        this.sanctions = sanctions;
+    public String getAddres() {
+        return addres;
     }
 
-    public void setSanc_money(int sanc_money) {
-        this.sanc_money = sanc_money;
+    public void setAddres(String addres) {
+        this.addres = addres;
     }
 
-    public int getId() {
-        return id;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getLast_name_p() {
-        return last_name_p;
-    }
-
-    public String getLast_name_m() {
-        return last_name_m;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public String getTel() {
-        return tel;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getSanctions() {
         return sanctions;
     }
 
+    public void setSanctions(int sanctions) {
+        this.sanctions = sanctions;
+    }
+
     public int getSanc_money() {
         return sanc_money;
     }
+
+    public void setSanc_money(int sanc_money) {
+        this.sanc_money = sanc_money;
+    }
+    
+    
 }

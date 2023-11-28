@@ -26,7 +26,12 @@ public class FormMain extends javax.swing.JFrame {
      */
     private static HashMap<String, JPanel> listViews;
     private static boolean modeDark;
-
+    private static boolean binaryMode = true;
+    private static boolean aVLMode = false;
+    private static boolean mViasMode = false;
+    private static boolean bMode = false;
+    private static int ordenMVias = 3;
+    
     /**
      * Constructor del formulario principal.
      */
@@ -34,6 +39,7 @@ public class FormMain extends javax.swing.JFrame {
         initComponents();
         initStyles();
         initViews();
+        showTreeMode();
     }
 
     /**
@@ -60,6 +66,16 @@ public class FormMain extends javax.swing.JFrame {
         graphicUtils.setStyle(booksButton, "h3",
                 Color.white);
         graphicUtils.setStyle(reportsButton, "h3",
+                Color.white);
+        graphicUtils.setStyle(binaryModeButton, null,
+                Color.white);
+        graphicUtils.setStyle(aVLModeButton, null,
+                Color.white);
+        graphicUtils.setStyle(mViasModeButton, null,
+                Color.white);
+        graphicUtils.setStyle(bModeButton, null,
+                Color.white);
+        graphicUtils.setStyle(treeModeActuallyMode, null,
                 Color.white);
         titleSeparator.setForeground(Color.black);
         dateLabel.setText(graphicUtils.setDate());
@@ -103,6 +119,11 @@ public class FormMain extends javax.swing.JFrame {
         booksButton = new javax.swing.JButton();
         reportsButton = new javax.swing.JButton();
         IUModeButton = new javax.swing.JButton();
+        aVLModeButton = new javax.swing.JButton();
+        binaryModeButton = new javax.swing.JButton();
+        bModeButton = new javax.swing.JButton();
+        mViasModeButton = new javax.swing.JButton();
+        treeModeActuallyMode = new javax.swing.JLabel();
         statePanel = new javax.swing.JPanel();
         stateLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -231,6 +252,46 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
 
+        aVLModeButton.setBackground(new java.awt.Color(204, 153, 0));
+        aVLModeButton.setText("AVL");
+        aVLModeButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 153, 0)));
+        aVLModeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aVLModeButtonActionPerformed(evt);
+            }
+        });
+
+        binaryModeButton.setBackground(new java.awt.Color(204, 153, 0));
+        binaryModeButton.setText("Binario");
+        binaryModeButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 153, 0)));
+        binaryModeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                binaryModeButtonActionPerformed(evt);
+            }
+        });
+
+        bModeButton.setBackground(new java.awt.Color(204, 153, 0));
+        bModeButton.setText("B");
+        bModeButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 153, 0)));
+        bModeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bModeButtonActionPerformed(evt);
+            }
+        });
+
+        mViasModeButton.setBackground(new java.awt.Color(204, 153, 0));
+        mViasModeButton.setText("MVias");
+        mViasModeButton.setToolTipText("");
+        mViasModeButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 153, 0)));
+        mViasModeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mViasModeButtonActionPerformed(evt);
+            }
+        });
+
+        treeModeActuallyMode.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        treeModeActuallyMode.setText("ModeTree");
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -238,18 +299,29 @@ public class FormMain extends javax.swing.JFrame {
             .addComponent(lendingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(usersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(principalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(returnsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addComponent(returnsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(booksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleSeparator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuPanelLayout.createSequentialGroup()
+                        .addComponent(IUModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(binaryModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(aVLModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mViasModeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(treeModeActuallyMode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(titleSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(IUModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,8 +348,15 @@ public class FormMain extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(IUModeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(treeModeActuallyMode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IUModeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aVLModeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(binaryModeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bModeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mViasModeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         statePanel.setBackground(new java.awt.Color(229, 172, 0));
@@ -352,6 +431,57 @@ public class FormMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public static void setBinaryMode() {
+        binaryMode = true;
+        aVLMode = false;
+        mViasMode = false;
+        bMode = false;
+    }
+    public static void setAVLMode() {
+        binaryMode = false;
+        aVLMode = true;
+        mViasMode = false;
+        bMode = false;
+    }
+
+    public static void setMViasMode() {
+        binaryMode = false;
+        aVLMode = false;
+        mViasMode = true;
+        bMode = false;
+    }
+
+    public static void setBMode() {
+        binaryMode = false;
+        aVLMode = false;
+        mViasMode = false;
+        bMode = true;
+    }
+
+    public static boolean isBinaryMode() {
+        return binaryMode;
+    }
+
+    public static boolean isAVLMode() {
+        return aVLMode;
+    }
+
+    public static boolean isMViasMode() {
+        return mViasMode;
+    }
+
+    public static boolean isBMode() {
+        return bMode;
+    }
+    
+    public static int getOrdenMVias() {
+        return ordenMVias;
+    }
+
+    public static void setOrdenMVias(int ordenMVias) {
+        FormMain.ordenMVias = ordenMVias;
+    }
+    
     /**
      * Evento que muestra la vista "principal".
      *
@@ -437,13 +567,57 @@ public class FormMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_IUModeButtonActionPerformed
 
+    private void aVLModeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aVLModeButtonActionPerformed
+        if (!FormMain.isAVLMode()) {
+            java.awt.EventQueue.invokeLater(() -> {
+                FormMain.setAVLMode();
+                new FormMain().setVisible(true);
+                this.dispose();
+            });
+        }
+    }//GEN-LAST:event_aVLModeButtonActionPerformed
+
+    private void binaryModeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_binaryModeButtonActionPerformed
+        if (!FormMain.isBinaryMode()) {
+            java.awt.EventQueue.invokeLater(() -> {
+                FormMain.setBinaryMode();
+                new FormMain().setVisible(true);
+                this.dispose();
+            });
+        }
+    }//GEN-LAST:event_binaryModeButtonActionPerformed
+
+    private void bModeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModeButtonActionPerformed
+        if (!FormMain.isBMode()) {
+            java.awt.EventQueue.invokeLater(() -> {
+                FormMain.setBMode();
+                new FormMain().setVisible(true);
+                this.dispose();
+            });
+        }
+    }//GEN-LAST:event_bModeButtonActionPerformed
+
+    private void mViasModeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mViasModeButtonActionPerformed
+        if (!FormMain.isMViasMode()) {
+            java.awt.EventQueue.invokeLater(() -> {
+                FormMain.setMViasMode();
+                new FormMain().setVisible(true);
+                this.dispose();
+            });
+        }
+    }//GEN-LAST:event_mViasModeButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton IUModeButton;
+    private javax.swing.JButton aVLModeButton;
+    private javax.swing.JButton bModeButton;
     private javax.swing.JPanel background;
+    private javax.swing.JButton binaryModeButton;
     private javax.swing.JButton booksButton;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel happyMessageLabel;
     private javax.swing.JButton lendingsButton;
+    private javax.swing.JButton mViasModeButton;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton principalButton;
     private javax.swing.JButton reportsButton;
@@ -452,6 +626,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel statePanel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JSeparator titleSeparator;
+    private javax.swing.JLabel treeModeActuallyMode;
     private javax.swing.JButton usersButton;
     private static javax.swing.JPanel viewsPanel;
     // End of variables declaration//GEN-END:variables
@@ -463,5 +638,17 @@ public class FormMain extends javax.swing.JFrame {
      */
     public static void showJPanel(JPanel panelShow) {
         graphicUtils.showJPanel(panelShow, viewsPanel);
+    }
+
+    private void showTreeMode() {
+        if(isBinaryMode()){
+            treeModeActuallyMode.setText("Esta en BinaryMode");
+        }else if(isAVLMode()){
+            treeModeActuallyMode.setText("Esta en AVLMode");
+        }else if(isMViasMode()){
+            treeModeActuallyMode.setText("Esta en MViasMode");
+        }else{
+            treeModeActuallyMode.setText("Esta en BMode");
+        }
     }
 }

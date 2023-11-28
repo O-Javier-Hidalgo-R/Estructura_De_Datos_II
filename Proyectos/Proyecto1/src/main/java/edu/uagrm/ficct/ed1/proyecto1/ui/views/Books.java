@@ -3,6 +3,9 @@ package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 import bo.uagrm.ficct.ed2.arbolbusqueda.ClaveNoEncontrada;
 import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
 import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolAVL;
+import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolB;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.MBook;
 import edu.uagrm.ficct.ed1.proyecto1.ui.forms.FormMain;
 import edu.uagrm.ficct.ed1.proyecto1.utils.Serializer;
@@ -13,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Vista para la visualizacion de catalogos de libros.
+ * Vista para la visualizacion de los libros.
  *
  * @author OJavierHR
  */
@@ -22,8 +25,7 @@ public class Books extends javax.swing.JPanel {
     /**
      * Arbol de busqueda en el que se almacenan los libros.
      */
-    private static final IArbolBusqueda<Long, MBook> aBBooks
-            = new ArbolAVL<>();
+    private static IArbolBusqueda<Long, MBook> aBBooks;
     /**
      * Variable para guardar la referencia al modelo usado en las filas del
      * jtable donde se muestran los libros.
@@ -34,10 +36,20 @@ public class Books extends javax.swing.JPanel {
      * Constructor por defecto.
      */
     public Books() {
+        if(FormMain.isBinaryMode()){
+            aBBooks = new ArbolBinarioBusquedaRecursivo<>();
+        }else if (FormMain.isAVLMode()){
+            aBBooks = new ArbolAVL<>();
+        }else if (FormMain.isMViasMode()){
+            aBBooks = new ArbolMVias<>(FormMain.getOrdenMVias());
+        }else{
+            aBBooks = new ArbolB<>(FormMain.getOrdenMVias());
+        }
         initComponents();
         model = (DefaultTableModel) BooksTable.getModel();
-        //InitStyles();
-        LoadBooks();
+        InitStyles();
+        loadBooks();
+        showABSize();
     }
 
     /**
@@ -49,7 +61,7 @@ public class Books extends javax.swing.JPanel {
         caso de estar vacio*/
         textInputBox.putClientProperty("JTextField.placeholderText",
                 "Ingrese el ID del libro a buscar.");
-        graphicUtils.setStyle(titleLabel, "h2", null);
+        //graphicUtils.setStyle(titleLabel, "h2", null);
     }
 
     /**
@@ -79,6 +91,7 @@ public class Books extends javax.swing.JPanel {
         newButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        cantLebel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(584, 383));
 
@@ -134,6 +147,7 @@ public class Books extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        BooksTable.setColumnSelectionAllowed(true);
         BooksTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(BooksTable);
 
@@ -204,6 +218,8 @@ public class Books extends javax.swing.JPanel {
             }
         });
 
+        cantLebel.setText("Cant:");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -230,7 +246,6 @@ public class Books extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(newButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(33, 33, 33)
@@ -238,19 +253,28 @@ public class Books extends javax.swing.JPanel {
                                 .addGap(29, 29, 29)
                                 .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(textInputBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(refreshButton)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(textInputBox)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(338, 338, 338)))
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cantLebel)
+                                    .addComponent(refreshButton))))
                         .addContainerGap())))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleLabel)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleLabel)
+                    .addComponent(cantLebel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(refreshButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -269,10 +293,11 @@ public class Books extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -321,6 +346,7 @@ public class Books extends javax.swing.JPanel {
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
         showAllBooks();
+        showABSize();
     }//GEN-LAST:event_refreshButtonActionPerformed
     /**
      * Evento al presionar el boton de nuevo.
@@ -329,7 +355,7 @@ public class Books extends javax.swing.JPanel {
      */
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:        
-        FormMain.showJPanel(new UpBook(aBBooks,Long.valueOf(UpBook.NEW_KEY)));
+        FormMain.showJPanel(new UpBook(aBBooks, UpBook.NEW_KEY));
     }//GEN-LAST:event_newButtonActionPerformed
     /**
      * Evento al presionar el boton de editar.
@@ -337,11 +363,11 @@ public class Books extends javax.swing.JPanel {
      * @param evt
      */
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:        
+        // TODO add your handling code here:
+        int i = BooksTable.getSelectedRow();
+        Long clave = (Long) model.getValueAt(i, 0);
         if(BooksTable.getSelectedRow() >= 0){
-            FormMain.showJPanel(new UpBook(aBBooks, 
-                    (Long) model.getValueAt(BooksTable.getSelectedRow(), 
-                            0)));
+            FormMain.showJPanel(new UpBook(aBBooks, clave));
         }
     }//GEN-LAST:event_editButtonActionPerformed
     /**
@@ -359,6 +385,7 @@ public class Books extends javax.swing.JPanel {
         }
         savedBooks();
         showAllBooks();
+        showABSize();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void textInputBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textInputBoxActionPerformed
@@ -369,6 +396,7 @@ public class Books extends javax.swing.JPanel {
     private javax.swing.JTable BooksTable;
     private javax.swing.JRadioButton authorCheckCircle;
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel cantLebel;
     private javax.swing.JRadioButton categoryCheckCircle;
     private javax.swing.JRadioButton categoryCheckCircle1;
     private javax.swing.JRadioButton categoryCheckCircle2;
@@ -389,9 +417,9 @@ public class Books extends javax.swing.JPanel {
      * Procedimiento que "carga" los libros al arbol de busqueda desde un lugar
      * de almacenamiento.
      */
-    private void LoadBooks() {
+    private void loadBooks() {
         //carga los libros desde "datos externos"
-        Serializer.deserializeSearchTree(aBBooks, Serializer.DEFAULT_ROOT + "books");
+        Serializer.deserializeBookSearchTree(aBBooks, Serializer.DEFAULT_ROOT + "books");
         showAllBooks();
     }
 
@@ -431,5 +459,9 @@ public class Books extends javax.swing.JPanel {
 
     public static void savedBooks() {
         Serializer.serializeSearchTree(aBBooks, Serializer.DEFAULT_ROOT + "books");
+    }
+
+    private void showABSize() {
+        cantLebel.setText("Cantidad: " + aBBooks.size());
     }
 }

@@ -3,7 +3,9 @@ package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 import bo.uagrm.ficct.ed2.arbolbusqueda.ClaveNoEncontrada;
 import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
 import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolAVL;
-import edu.uagrm.ficct.ed1.proyecto1.app.models.MBook;
+import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolB;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.User;
 import edu.uagrm.ficct.ed1.proyecto1.ui.forms.FormMain;
 import edu.uagrm.ficct.ed1.proyecto1.utils.Serializer;
@@ -23,8 +25,7 @@ public class Users extends javax.swing.JPanel {
     /**
      * Arbol de busqueda en el que se almacenan los libros.
      */
-    private static final IArbolBusqueda<Long, User> aBUsers
-            = new ArbolAVL<>();
+    private static IArbolBusqueda<Long, User> aBUsers;
     /**
      * Variable para guardar la referencia al modelo usado en las filas del
      * jtable donde se muestran los libros.
@@ -35,10 +36,20 @@ public class Users extends javax.swing.JPanel {
      * Constructor por defecto.
      */
     public Users() {
+        if(FormMain.isBinaryMode()){
+            aBUsers = new ArbolBinarioBusquedaRecursivo<>();
+        }else if (FormMain.isAVLMode()){
+            aBUsers = new ArbolAVL<>();
+        }else if (FormMain.isMViasMode()){
+            aBUsers = new ArbolMVias<>(FormMain.getOrdenMVias());
+        }else{
+            aBUsers = new ArbolB<>(FormMain.getOrdenMVias());
+        }
         initComponents();
         model = (DefaultTableModel) userTable.getModel();
         InitStyles();
         LoadBooks();
+        showABUSize();
     }
 
     /**
@@ -66,6 +77,8 @@ public class Users extends javax.swing.JPanel {
         newButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        cantLabel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(584, 383));
 
@@ -152,6 +165,18 @@ public class Users extends javax.swing.JPanel {
             }
         });
 
+        refreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        refreshButton.setText("Actualizar");
+        refreshButton.setBorderPainted(false);
+        refreshButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        cantLabel.setText("cant");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -166,24 +191,33 @@ public class Users extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)
-                    .addComponent(userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(textInputBox)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(textInputBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cantLabel)
+                            .addComponent(refreshButton))))
                 .addContainerGap())
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userLabel)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(userLabel)
+                    .addComponent(cantLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textInputBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textInputBox))
+                    .addComponent(refreshButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
@@ -237,7 +271,7 @@ public class Users extends javax.swing.JPanel {
      */
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:        
-        FormMain.showJPanel(new UpUser());
+        FormMain.showJPanel(new UpUser(aBUsers, Long.valueOf(UpUser.NEW_KEY)));
     }//GEN-LAST:event_newButtonActionPerformed
     /**
      * Evento al presionar el boton de editar.
@@ -246,10 +280,10 @@ public class Users extends javax.swing.JPanel {
      */
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:        
+        int i = userTable.getSelectedRow();
+        Long clave = (Long) model.getValueAt(i, 0);
         if(userTable.getSelectedRow() >= 0){
-            FormMain.showJPanel(new UpUser(aBUsers, 
-                    (Long) model.getValueAt(userTable.getSelectedRow(), 
-                            0)));
+            FormMain.showJPanel(new UpUser(aBUsers, clave));
         }
     }//GEN-LAST:event_editButtonActionPerformed
     /**
@@ -267,14 +301,23 @@ public class Users extends javax.swing.JPanel {
         }
         savedUser();
         showAllUsers();
+        showABUSize();
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        showAllUsers();
+        showABUSize();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel cantLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newButton;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField textInputBox;
     private javax.swing.JLabel userLabel;
@@ -286,7 +329,7 @@ public class Users extends javax.swing.JPanel {
      */
     private void LoadBooks() {
         //carga los libros desde "datos externos"
-        Serializer.deserializeSearchTree(aBUsers, Serializer.DEFAULT_ROOT + "books");
+        Serializer.deserializeUsersSearchTree(aBUsers, Serializer.DEFAULT_ROOT + "users");
         showAllUsers();
     }
 
@@ -294,6 +337,12 @@ public class Users extends javax.swing.JPanel {
      * Operacion que muestra todos los usuarios almacenados.
      */
     public static void showAllUsers() {
+        List<Long> lisClaves = aBUsers.recorridoInOrden();
+        graphicUtils.TableBooksClear(model);
+        for (int i = 0; i < lisClaves.size(); i++) {
+            addUserInTable(lisClaves.get(i),
+                    aBUsers.buscar(lisClaves.get(i)));
+        }
     }
 
     /**
@@ -305,16 +354,19 @@ public class Users extends javax.swing.JPanel {
     private static void addUserInTable(Long bookKey, User user) {
         model.addRow(new Object[]{
             bookKey,
-            user.getId(),
             user.getName(),
-            user.getLast_name_p(),
-            user.getLast_name_m(),
-            user.getDomicilio(),
-            user.getTel()
+            user.getFistLastName(),
+            user.getSecondLastName(),
+            user.getAddres(),
+            user.getPhone()
         });
     }
 
     public static void savedUser() {
-        Serializer.serializeSearchTree(aBUsers, Serializer.DEFAULT_ROOT + "books");
+        Serializer.serializeSearchTree(aBUsers, Serializer.DEFAULT_ROOT + "users");
+    }
+
+    private void showABUSize() {
+        cantLabel.setText("Cantidad: " + aBUsers.size());
     }
 }

@@ -1,10 +1,32 @@
 package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 
-public class Lendings extends javax.swing.JPanel {
+import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
+import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolAVL;
+import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolB;
+import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
+import edu.uagrm.ficct.ed1.proyecto1.ui.forms.FormMain;
+import static edu.uagrm.ficct.ed1.proyecto1.ui.views.Books.showAllBooks;
+import edu.uagrm.ficct.ed1.proyecto1.utils.Serializer;
 
+public class Lendings extends javax.swing.JPanel {
+    
+    private static IArbolBusqueda<Long, Lendings> aBLending;
+    
     public Lendings() {
+        if(FormMain.isBinaryMode()){
+            aBLending = new ArbolBinarioBusquedaRecursivo<>();
+        }else if (FormMain.isAVLMode()){
+            aBLending = new ArbolAVL<>();
+        }else if (FormMain.isMViasMode()){
+            aBLending = new ArbolMVias<>(FormMain.getOrdenMVias());
+        }else{
+            aBLending = new ArbolB<>(FormMain.getOrdenMVias());
+        }
         initComponents();
         InitStyles();
+        loadBooks();
+        showABSize();
     }
 
     /**
@@ -25,18 +47,19 @@ public class Lendings extends javax.swing.JPanel {
         button = new javax.swing.JButton();
         image = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
 
         folioLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        folioLbl.setText("Folio Usuario");
+        folioLbl.setText("ID Usuario");
 
         folioTxt.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         folioTxt.setToolTipText("");
 
         libroIdLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        libroIdLbl.setText("Libro ID");
+        libroIdLbl.setText("ID Libro");
 
         libroIdTxt.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
@@ -55,6 +78,8 @@ public class Lendings extends javax.swing.JPanel {
         title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         title.setText("Prestamos");
 
+        jLabel1.setText("Nro Prestamo");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -71,7 +96,8 @@ public class Lendings extends javax.swing.JPanel {
                     .addComponent(folioTxt)
                     .addComponent(button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(libroIdTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(libroIdLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(libroIdLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         bgLayout.setVerticalGroup(
@@ -90,8 +116,10 @@ public class Lendings extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(libroIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 190, Short.MAX_VALUE))
+                        .addGap(0, 139, Short.MAX_VALUE))
                     .addComponent(image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -119,13 +147,22 @@ public class Lendings extends javax.swing.JPanel {
     private javax.swing.JLabel folioLbl;
     private javax.swing.JTextField folioTxt;
     private javax.swing.JLabel image;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel libroIdLbl;
     private javax.swing.JTextField libroIdTxt;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
-
     private void InitStyles() {
         
+    }
+
+    private void loadBooks() {
+        Serializer.deserializeLendingsSearchTree(aBLending, Serializer.DEFAULT_ROOT + "books");
+        showAllLendings();
+    }
+
+    private void showABSize() {
+        cantLebel.setText("Cantidad: " + aBLending.size());
     }
 }

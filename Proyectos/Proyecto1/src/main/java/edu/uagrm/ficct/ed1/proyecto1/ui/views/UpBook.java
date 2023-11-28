@@ -6,32 +6,25 @@ import edu.uagrm.ficct.ed1.proyecto1.utils.appUtils;
 import java.util.List;
 
 public class UpBook extends javax.swing.JPanel {
-    public static final int NEW_KEY = -1;
     private static IArbolBusqueda<Long, MBook> rAB;
-    private Long localKey;
+    private long localKey;
+    public static final long NEW_KEY = -1;
 
     public UpBook() {
         initComponents();
-        InitStyles();
+        //InitStyles();
     }
 
-    private void InitStyles() {
-    }
-    
     public UpBook(IArbolBusqueda<Long, MBook> rAB, Long clave) {
         this();
         UpBook.rAB = rAB;
         newKeyOptionCheck.setVisible(false);
-        if (clave != NEW_KEY) {
-            setLocalKey(clave);
-            showBookUp(getLocalKey(), rAB.buscar(clave));
+        this.localKey = clave;
+        if (clave != UpBook.NEW_KEY) {
+            showBookUp(this.localKey, rAB.buscar(this.localKey));
             keyText.setEnabled(false);
             newKeyOptionCheck.setVisible(true);
         }
-    }
-
-    private void setLocalKey(Long bookKey) {
-        this.localKey = bookKey;
     }
 
     private Long getLocalKey() {

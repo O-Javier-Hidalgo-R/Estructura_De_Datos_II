@@ -20,11 +20,11 @@ public class Returns extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         folioLbl = new javax.swing.JLabel();
         folioTxt = new javax.swing.JTextField();
-        libroIdLbl = new javax.swing.JLabel();
-        libroIdTxt = new javax.swing.JTextField();
         button = new javax.swing.JButton();
         image = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
+        folioLbl1 = new javax.swing.JLabel();
+        folioLbl2 = new javax.swing.JLabel();
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
@@ -34,11 +34,6 @@ public class Returns extends javax.swing.JPanel {
 
         folioTxt.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         folioTxt.setToolTipText("");
-
-        libroIdLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        libroIdLbl.setText("Libro ID");
-
-        libroIdTxt.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
         button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         button.setText("Prestar");
@@ -55,6 +50,12 @@ public class Returns extends javax.swing.JPanel {
         title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         title.setText("Prestamos");
 
+        folioLbl1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        folioLbl1.setText("Libro");
+
+        folioLbl2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        folioLbl2.setText("Usuario");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -65,9 +66,9 @@ public class Returns extends javax.swing.JPanel {
                     .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                     .addComponent(folioLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(folioTxt)
-                    .addComponent(libroIdLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(libroIdTxt)
-                    .addComponent(button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(folioLbl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(folioLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -86,12 +87,12 @@ public class Returns extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(folioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(libroIdLbl)
+                        .addComponent(folioLbl2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(libroIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(folioLbl1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 135, Short.MAX_VALUE))
+                        .addGap(0, 154, Short.MAX_VALUE))
                     .addComponent(image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,11 +118,11 @@ public class Returns extends javax.swing.JPanel {
     private javax.swing.JPanel bg;
     private javax.swing.JButton button;
     private javax.swing.JLabel folioLbl;
+    private javax.swing.JLabel folioLbl1;
+    private javax.swing.JLabel folioLbl2;
     private javax.swing.JTextField folioTxt;
     private javax.swing.JLabel image;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel libroIdLbl;
-    private javax.swing.JTextField libroIdTxt;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 

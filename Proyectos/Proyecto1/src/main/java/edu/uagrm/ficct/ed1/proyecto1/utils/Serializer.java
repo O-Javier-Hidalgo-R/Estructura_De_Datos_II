@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.MBook;
+import edu.uagrm.ficct.ed1.proyecto1.app.models.User;
+import edu.uagrm.ficct.ed1.proyecto1.ui.views.Lendings;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,6 +57,10 @@ public class Serializer {
         return null;
     }
 
+    public static void deserializeLendingsSearchTree(IArbolBusqueda<Long, Lendings> aBLending, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private static class TreeElement<K extends Comparable<K>, V> {
 
         private final K key;
@@ -87,13 +93,24 @@ public class Serializer {
         serialize(elements, path);
     }
 
-    public static void deserializeSearchTree(IArbolBusqueda ab, String path) {
+    public static void deserializeBookSearchTree(IArbolBusqueda ab, String path) {
         Type type = new TypeToken<List<TreeElement<Long, MBook>>>() {
         }.getType();
-        List<TreeElement<Integer, MBook>> elements
-                = (List<TreeElement<Integer, MBook>>) deserialize(type, path);
+        List<TreeElement<Long, MBook>> elements
+                = (List<TreeElement<Long, MBook>>) deserialize(type, path);
 
-        for (TreeElement<Integer, MBook> element : elements) {
+        for (TreeElement<Long, MBook> element : elements) {
+            ab.insertar(element.key, element.valor);
+        }
+    }
+    
+    public static void deserializeUsersSearchTree(IArbolBusqueda ab, String path) {
+        Type type = new TypeToken<List<TreeElement<Long, User>>>() {
+        }.getType();
+        List<TreeElement<Long, User>> elements
+                = (List<TreeElement<Long, User>>) deserialize(type, path);
+
+        for (TreeElement<Long, User> element : elements) {
             ab.insertar(element.key, element.valor);
         }
     }

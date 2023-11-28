@@ -32,16 +32,16 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="title" alignment="0" pref="217" max="32767" attributes="0"/>
                       <Component id="folioLbl" alignment="0" max="32767" attributes="0"/>
                       <Component id="folioTxt" alignment="0" max="32767" attributes="0"/>
-                      <Component id="libroIdLbl" alignment="0" max="32767" attributes="0"/>
-                      <Component id="libroIdTxt" alignment="0" max="32767" attributes="0"/>
                       <Component id="button" alignment="0" max="32767" attributes="0"/>
+                      <Component id="folioLbl1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="folioLbl2" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="image" pref="358" max="32767" attributes="0"/>
@@ -61,12 +61,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="folioTxt" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="libroIdLbl" min="-2" max="-2" attributes="0"/>
+                          <Component id="folioLbl2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="libroIdTxt" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="folioLbl1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="button" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="135" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="154" max="32767" attributes="0"/>
                       </Group>
                       <Component id="image" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -101,21 +101,6 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="libroIdLbl">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Libro ID"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="libroIdTxt">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="15" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="button">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -144,6 +129,22 @@
               <Font name="Segoe UI" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Prestamos"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="folioLbl1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Libro"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="folioLbl2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
           </Properties>
         </Component>
       </SubComponents>
