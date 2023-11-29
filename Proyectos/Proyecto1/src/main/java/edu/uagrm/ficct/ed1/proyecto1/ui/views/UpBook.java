@@ -1,7 +1,7 @@
 package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 
-import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.MBook;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.IArbolBusqueda;
 import edu.uagrm.ficct.ed1.proyecto1.utils.appUtils;
 import java.util.List;
 

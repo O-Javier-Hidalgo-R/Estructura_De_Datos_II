@@ -1,12 +1,12 @@
 package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 
-import bo.uagrm.ficct.ed2.arbolbusqueda.ClaveNoEncontrada;
-import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
-import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolAVL;
-import bo.uagrm.ficct.ed2.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
-import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolB;
-import bo.uagrm.ficct.ed2.arbolbusqueda.mvias.ArbolMVias;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.User;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.ClaveNoEncontrada;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.IArbolBusqueda;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.binario.ArbolAVL;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.binario.ArbolBinarioBusquedaRecursivo;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.mvias.ArbolB;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.mvias.ArbolMVias;
 import edu.uagrm.ficct.ed1.proyecto1.ui.forms.FormMain;
 import edu.uagrm.ficct.ed1.proyecto1.utils.Serializer;
 import edu.uagrm.ficct.ed1.proyecto1.utils.graphicUtils;

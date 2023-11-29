@@ -1,7 +1,7 @@
 package edu.uagrm.ficct.ed1.proyecto1.ui.views;
 
-import bo.uagrm.ficct.ed2.arbolbusqueda.IArbolBusqueda;
 import edu.uagrm.ficct.ed1.proyecto1.app.models.User;
+import edu.uagrm.ficct.ed1.proyecto1.arbolbusqueda.IArbolBusqueda;
 
 public class UpUser extends javax.swing.JPanel {
     private static IArbolBusqueda<Long, User> rAB;

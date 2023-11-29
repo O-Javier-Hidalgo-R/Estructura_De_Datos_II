@@ -37,25 +37,6 @@
     }
   },
   {
-    "key": 9788412295511,
-    "valor": {
-      "title": "LA LLAMADA DE CTHULHU",
-      "date": "2021/06/21",
-      "author": "H. P. Lovecraft",
-      "categoriesList": [
-        "Misterio",
-        "Horror",
-        "cosmico"
-      ],
-      "publisher": "Alpha Decay",
-      "description": "En el invierno de 1926 fallece el tío abuelo del narrador de este cuento de culto, profesor de lenguas semíticas en la universidad de Brown y autoridad en el campo de las inscripciones antiguas. La medicina no puede aclarar las circunstancias de esta muerte envuelta por el misterio.",
-      "language": "Castellano",
-      "pages": 96,
-      "stock": 10,
-      "available": 10
-    }
-  },
-  {
     "key": 9788441539907,
     "valor": {
       "title": "Arquitectura limpia: Guía para especialistas en la estructura y el diseño de software",
@@ -90,6 +71,100 @@
       "pages": 273,
       "stock": 20,
       "available": 20
+    }
+  },
+  {
+    "key": 9788412295511,
+    "valor": {
+      "title": "LA LLAMADA DE CTHULHU",
+      "date": "2021/06/21",
+      "author": "H. P. Lovecraft",
+      "categoriesList": [
+        "Misterio",
+        "Horror",
+        "cosmico"
+      ],
+      "publisher": "Alpha Decay",
+      "description": "En el invierno de 1926 fallece el tío abuelo del narrador de este cuento de culto, profesor de lenguas semíticas en la universidad de Brown y autoridad en el campo de las inscripciones antiguas. La medicina no puede aclarar las circunstancias de esta muerte envuelta por el misterio.",
+      "language": "Castellano",
+      "pages": 96,
+      "stock": 10,
+      "available": 10
+    }
+  },
+  {
+    "key": 9788418174193,
+    "valor": {
+      "title": "EL PRINCIPITO",
+      "date": "2021-05-04",
+      "author": "Antoine de Saint Exupery",
+      "categoriesList": [
+        "Literatura",
+        "Infantil"
+      ],
+      "publisher": "SALAMANDRA",
+      "description": "Fábula mítica y relato filosófico que interroga acerca de la relación del ser humano con su prójimo y con el mundo, El Principito  concentra, con maravillosa simplicidad, la constante reflexión de  Saint-Exupery sobre la amistad, el amor y el sentido de la vida.",
+      "language": "CASTELLANO",
+      "pages": 96,
+      "stock": 5,
+      "available": 5
+    }
+  },
+  {
+    "key": 9788466236645,
+    "valor": {
+      "title": "DON QUIJOTE DE LA MANCHA",
+      "date": "2016-11-04",
+      "author": "Miguel de Cervantes Saavedra",
+      "categoriesList": [
+        "Literatura",
+        "Clasicos"
+      ],
+      "publisher": "LIBSA",
+      "description": "Aquí descubriremos al loco más lúcido de la historia de la literatura, tanto que recorriendo un lugar de la mancha, inventó su propia realidad para huir del mundo que le rodeaba.",
+      "language": "CASTELLANO",
+      "pages": 640,
+      "stock": 15,
+      "available": 15
+    }
+  },
+  {
+    "key": 5,
+    "valor": {
+      "title": "Un titulo",
+      "date": "09/09/1999",
+      "author": "Un autor",
+      "categoriesList": [
+        "Una",
+        "categoria",
+        "Otra",
+        "categoria"
+      ],
+      "publisher": "Una editorial",
+      "description": "Una descripcion del libro...",
+      "language": "Un idioma",
+      "pages": 999,
+      "stock": 9,
+      "available": 9
+    }
+  },
+  {
+    "key": 9781324001805,
+    "valor": {
+      "title": "The Iliad",
+      "date": "2023-08-26",
+      "author": "Homer",
+      "categoriesList": [
+        "Literatura",
+        "Ficción",
+        "Clasicos"
+      ],
+      "publisher": "W. W. Norton \u0026 Company",
+      "description": "The Iliad roars with the clamor of arms, the bellowing boasts of victors, the fury and grief of loss, and the anguished cries of dying men. It sings, too, of the sublime magnitude of the world―the fierce beauty of nature and the gods’ grand schemes beyond the ken of mortals. In Wilson’s hands, this thrilling, magical, and often horrifying tale now gallops at a pace befitting its legendary battle scenes, in crisp but resonant language that evokes the poem’s deep pathos and reveals palpably real, even “complicated,” characters―both human and divine.",
+      "language": "INGLÉS",
+      "pages": 848,
+      "stock": 12,
+      "available": 12
     }
   },
   {
@@ -132,39 +207,57 @@
     }
   },
   {
-    "key": 9788418174193,
+    "key": 9788418037542,
     "valor": {
-      "title": "EL PRINCIPITO",
-      "date": "2021-05-04",
-      "author": "Antoine de Saint Exupery",
+      "title": "TRILOGIA FUNDACION",
+      "date": "2022-04-07",
+      "author": "Isaac Asimov",
       "categoriesList": [
-        "Literatura",
-        "Infantil"
+        "Literaruta",
+        "Ciencia-Ficcion"
       ],
-      "publisher": "SALAMANDRA",
-      "description": "Fábula mítica y relato filosófico que interroga acerca de la relación del ser humano con su prójimo y con el mundo, El Principito  concentra, con maravillosa simplicidad, la constante reflexión de  Saint-Exupery sobre la amistad, el amor y el sentido de la vida.",
+      "publisher": "NOVA",
+      "description": "Isaac Asimov empezó a escribir la saga de la Fundación a los veintiún  años, sin saber que un día esta obra se convertiría en la piedra angular  de la ciencia ficción del siglo XX, ni que con ella cautivaría a lectores de todas las edades durante más de siete decadas.",
       "language": "CASTELLANO",
-      "pages": 96,
-      "stock": 5,
-      "available": 5
+      "pages": 832,
+      "stock": 16,
+      "available": 16
     }
   },
   {
-    "key": 9788466236645,
+    "key": 9788426732279,
     "valor": {
-      "title": "DON QUIJOTE DE LA MANCHA",
-      "date": "2016-11-04",
-      "author": "Miguel de Cervantes Saavedra",
+      "title": "PYTHON A FONDO",
+      "date": "2021/02/08",
+      "author": "OSCAR RAMIREZ JIMENEZ",
+      "categoriesList": [
+        "ciencia",
+        "informatica"
+      ],
+      "publisher": "MARCOMBO",
+      "description": "Python es el mejor lenguaje de programación tanto para novatos como para veteranos. Es usado en empresas y start-ups de primer nivel, y cada día es más demandado y reconocido mundialmente.  Gracias a su carácter polivalente, Python se emplea en las FANG (Facebook, Amazon, Netflix y Google), en scripts simples, aplicaciones de domótica, programación de aplicaciones de escritorio o aplicaciones web complejas que soportan miles de usuarios por segundo, como Instagram o YouTube.",
+      "language": "Español",
+      "pages": 648,
+      "stock": 13,
+      "available": 13
+    }
+  },
+  {
+    "key": 9788445006757,
+    "valor": {
+      "title": "¿SUEÑAN LOS ANDROIDES CON OVEJAS ELECTRICAS?",
+      "date": "2019-10-22",
+      "author": "Philip K. Dick",
       "categoriesList": [
         "Literatura",
-        "Clasicos"
+        "Ciencia-Ficcion"
       ],
-      "publisher": "LIBSA",
-      "description": "Aquí descubriremos al loco más lúcido de la historia de la literatura, tanto que recorriendo un lugar de la mancha, inventó su propia realidad para huir del mundo que le rodeaba.",
+      "publisher": "MINOTAURO",
+      "description": "Las empresas fabrican incluso seres humanos. Rick Deckard es un cazarrecompensas cuyo trabajo es encontrar androides rebeldes y retirarlos, pero la tarea no será tan sencilla cuando tenga que enfrentarse a los nuevos modelos Nexus-6, prácticamente indistinguibles de los seres humanos.",
       "language": "CASTELLANO",
-      "pages": 640,
-      "stock": 15,
-      "available": 15
+      "pages": 288,
+      "stock": 10,
+      "available": 10
     }
   },
   {
@@ -184,44 +277,6 @@
       "pages": 169,
       "stock": 20,
       "available": 20
-    }
-  },
-  {
-    "key": 1,
-    "valor": {
-      "title": "Un libro",
-      "date": "2006-11-21",
-      "author": "Maurice Naftalin",
-      "categoriesList": [
-        "Educación",
-        "Programación",
-        "Java"
-      ],
-      "publisher": "O\u0027Reilly Media-1th edition",
-      "description": "This comprehensive guide shows you how to master the most important changes to Java since it was first released. Generics and the greatly expanded collection libraries have tremendously increased the power of Java 5 and Java 6. But they have also confused many developers who haven\u0027t known how to take advantage of these new features.",
-      "language": "INGLÉS",
-      "pages": 273,
-      "stock": 20,
-      "available": 20
-    }
-  },
-  {
-    "key": 9781324001805,
-    "valor": {
-      "title": "The Iliad",
-      "date": "2023-08-26",
-      "author": "Homer",
-      "categoriesList": [
-        "Literatura",
-        "Ficción",
-        "Clasicos"
-      ],
-      "publisher": "W. W. Norton \u0026 Company",
-      "description": "The Iliad roars with the clamor of arms, the bellowing boasts of victors, the fury and grief of loss, and the anguished cries of dying men. It sings, too, of the sublime magnitude of the world―the fierce beauty of nature and the gods’ grand schemes beyond the ken of mortals. In Wilson’s hands, this thrilling, magical, and often horrifying tale now gallops at a pace befitting its legendary battle scenes, in crisp but resonant language that evokes the poem’s deep pathos and reveals palpably real, even “complicated,” characters―both human and divine.",
-      "language": "INGLÉS",
-      "pages": 848,
-      "stock": 12,
-      "available": 12
     }
   },
   {
@@ -299,42 +354,6 @@
     }
   },
   {
-    "key": 9788418037542,
-    "valor": {
-      "title": "TRILOGIA FUNDACION",
-      "date": "2022-04-07",
-      "author": "Isaac Asimov",
-      "categoriesList": [
-        "Literaruta",
-        "Ciencia-Ficcion"
-      ],
-      "publisher": "NOVA",
-      "description": "Isaac Asimov empezó a escribir la saga de la Fundación a los veintiún  años, sin saber que un día esta obra se convertiría en la piedra angular  de la ciencia ficción del siglo XX, ni que con ella cautivaría a lectores de todas las edades durante más de siete decadas.",
-      "language": "CASTELLANO",
-      "pages": 832,
-      "stock": 16,
-      "available": 16
-    }
-  },
-  {
-    "key": 9788426732279,
-    "valor": {
-      "title": "PYTHON A FONDO",
-      "date": "2021/02/08",
-      "author": "OSCAR RAMIREZ JIMENEZ",
-      "categoriesList": [
-        "ciencia",
-        "informatica"
-      ],
-      "publisher": "MARCOMBO",
-      "description": "Python es el mejor lenguaje de programación tanto para novatos como para veteranos. Es usado en empresas y start-ups de primer nivel, y cada día es más demandado y reconocido mundialmente.  Gracias a su carácter polivalente, Python se emplea en las FANG (Facebook, Amazon, Netflix y Google), en scripts simples, aplicaciones de domótica, programación de aplicaciones de escritorio o aplicaciones web complejas que soportan miles de usuarios por segundo, como Instagram o YouTube.",
-      "language": "Español",
-      "pages": 648,
-      "stock": 13,
-      "available": 13
-    }
-  },
-  {
     "key": 9788435018364,
     "valor": {
       "title": "YO, ROBOT",
@@ -350,24 +369,6 @@
       "pages": 328,
       "stock": 15,
       "available": 15
-    }
-  },
-  {
-    "key": 9788445006757,
-    "valor": {
-      "title": "¿SUEÑAN LOS ANDROIDES CON OVEJAS ELECTRICAS?",
-      "date": "2019-10-22",
-      "author": "Philip K. Dick",
-      "categoriesList": [
-        "Literatura",
-        "Ciencia-Ficcion"
-      ],
-      "publisher": "MINOTAURO",
-      "description": "Las empresas fabrican incluso seres humanos. Rick Deckard es un cazarrecompensas cuyo trabajo es encontrar androides rebeldes y retirarlos, pero la tarea no será tan sencilla cuando tenga que enfrentarse a los nuevos modelos Nexus-6, prácticamente indistinguibles de los seres humanos.",
-      "language": "CASTELLANO",
-      "pages": 288,
-      "stock": 10,
-      "available": 10
     }
   },
   {
